@@ -1,5 +1,5 @@
 // Modo sin conexión básico: la página se pide a la red primero; fotos y librerías salen de la caché.
-const C='hc-v1';
+const C='hc-v2';
 self.addEventListener('install',e=>{e.waitUntil(caches.open(C).then(c=>c.addAll(['./','index.html','icon.svg','img/r/hero-960.webp'])));self.skipWaiting()});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==C).map(x=>caches.delete(x)))));self.clients.claim()});
 self.addEventListener('fetch',e=>{

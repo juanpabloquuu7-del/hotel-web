@@ -230,6 +230,11 @@ section{padding:80px 0}
 #lb .lb-x{position:absolute;top:var(--s3);right:var(--s3);z-index:2}
 #lb .lb-nav{display:flex;gap:var(--s2)}
 ::view-transition-group(lbimg){animation-duration:420ms;animation-timing-function:var(--ease)}
+/* tarjetas que se inclinan en 3D con el ratón */
+.tilt-on .card>button,.tilt-on .gal figure{transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) translateY(var(--ty,0px));transition:transform 400ms var(--ease),border-color 150ms var(--ease);will-change:transform}
+.tilt-on .card>button:hover{--ty:-4px;transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) translateY(var(--ty))}
+.tilt-on .card>button.moving,.tilt-on .gal figure.moving{transition:transform 80ms linear,border-color 150ms var(--ease)}
+.swipe-n{display:none}
 /* títulos que suben palabra a palabra */
 .js h2.rv .w>span{animation:none;transition:transform 800ms var(--ease);transition-delay:calc(var(--i)*45ms)}
 .js h2.rv.in .w>span{transform:none}
@@ -443,6 +448,19 @@ footer .draft{flex-basis:100%;color:#9fb0b2;font-size:14px;border-top:1px solid 
   .ck .btn{min-height:36px;font-size:14px}
   .sticky{display:flex;position:fixed;inset:auto 0 0 0;z-index:30;padding:var(--s3) var(--s4) calc(var(--s3) + env(safe-area-inset-bottom));background:var(--ink);gap:var(--s3);transform:translateY(110%);transition:transform 320ms var(--ease)}
   .sticky.show{transform:none}
+  /* habitaciones y galería: se deslizan de lado */
+  .swipe{display:flex!important;gap:var(--s3);overflow-x:auto;scroll-snap-type:x mandatory;margin-inline:calc(-1*var(--s5));padding:var(--s1) var(--s5) var(--s3);scroll-padding-inline:var(--s5);scrollbar-width:none;overscroll-behavior-x:contain}
+  .swipe::-webkit-scrollbar{display:none}
+  .grid.swipe>.card{flex:0 0 84%;scroll-snap-align:start}
+  .gal.swipe figure{flex:0 0 84%;aspect-ratio:4/5;height:auto;scroll-snap-align:start}
+  .swipe-n{display:flex;align-items:center;justify-content:space-between;gap:var(--s3);margin-top:var(--s2);font-size:14px;color:var(--mut);font-variant-numeric:tabular-nums}
+  .swipe-n i{flex:1;height:2px;background:var(--line);border-radius:1px;position:relative;overflow:hidden}
+  .swipe-n i::after{content:"";position:absolute;inset:0;background:var(--ink);transform-origin:left;transform:scaleX(var(--p,0));transition:transform 200ms var(--ease)}
+  /* detalles de habitación y avisos: suben desde abajo */
+  #dlg,#legal{margin:auto 0 0;width:100%;max-width:none;border-radius:16px 16px 0 0;max-height:88svh}
+  #dlg[open],#legal[open]{animation:sheet 340ms var(--ease)}
+  #dlg::before,#legal::before{content:"";position:sticky;top:0;display:block;width:44px;height:4px;margin:0 auto -4px;border-radius:2px;background:rgba(214,224,224,.5);z-index:3;transform:translateY(8px)}
+  @keyframes sheet{from{transform:translateY(100%)}}
   #lb .lb-cap{font-size:17px}
   #lb .lb-bar{padding-inline:var(--s4)}
   .sticky .btn{flex:1;min-height:48px}
@@ -522,6 +540,7 @@ footer .draft{flex-basis:100%;color:#9fb0b2;font-size:14px;border-top:1px solid 
     <p class="hint" id="hint">Arrastra para girar. Toca un nivel para ir a su zona.</p>
     <div id="tip" class="s-tip" hidden></div><div id="tag" class="s-tag" hidden></div>
     <div class="ctl" id="ctl" role="group" aria-label="Controles de la maqueta 3D">
+      <button type="button" id="cGyro" aria-pressed="false" hidden>Mover con el teléfono</button>
       <button type="button" id="cDay" aria-pressed="false">Modo noche</button>
       <button type="button" id="cSpin" aria-pressed="false">Giro automático</button>
       <div class="seg" role="group" aria-label="Vista de la cámara">
@@ -558,7 +577,8 @@ footer .draft{flex-basis:100%;color:#9fb0b2;font-size:14px;border-top:1px solid 
     </fieldset>
     <div class="finder-out"><p id="finderMsg" aria-live="polite">Elige una opción o explora las 13 habitaciones.</p><button class="linkbtn" type="button" id="reset">Borrar elección</button></div>
   </div>
-  <div class="grid" id="grid"></div>
+  <div class="grid swipe" id="grid" data-label="Habitación"></div>
+  <p class="swipe-n" id="gridN" aria-hidden="true"></p>
   <p class="fine">Tarifas de referencia por noche, con IVA. Cambian según la fecha y el tipo de cama; confirmamos el valor exacto antes de reservar. Las medidas y camas son las publicadas por el hotel.</p>
 </div></section>
 
@@ -635,7 +655,7 @@ footer .draft{flex-basis:100%;color:#9fb0b2;font-size:14px;border-top:1px solid 
 
 <section id="galeria"><div class="wrap">
   <div class="head"><h2>Rincones del hotel</h2></div>
-  <div class="gal">
+  <div class="gal swipe" id="gal">
     <figure class="g1 clip"><img src="img/r/lobby-960.webp" srcset="img/r/lobby-480.webp 480w, img/r/lobby-960.webp 960w, img/r/lobby-1600.webp 1600w" sizes="(max-width:960px) 100vw, 50vw" alt="Recepción del hotel con mostrador dorado y sofás de cuero" width="1920" height="1282" loading="lazy"><figcaption>Recepción</figcaption></figure>
     <figure class="g2 clip"><img src="img/r/spa-960.webp" srcset="img/r/spa-480.webp 480w, img/r/spa-960.webp 960w, img/r/spa-1600.webp 1600w" sizes="(max-width:960px) 100vw, 50vw" alt="Cabina de spa con camilla de masaje" width="1920" height="1318" loading="lazy"><figcaption>Spa</figcaption></figure>
     <figure class="g3 clip"><img src="img/r/salon-960.webp" srcset="img/r/salon-480.webp 480w, img/r/salon-960.webp 960w, img/r/salon-1600.webp 1600w" sizes="(max-width:960px) 100vw, 50vw" alt="Salón Chicamocha montado para un evento" width="1920" height="1282" loading="lazy"><figcaption>Salón Chicamocha</figcaption></figure>
@@ -860,6 +880,7 @@ function landTown(t){
   spBody.classList.remove('in');void spBody.offsetWidth;
   spBody.innerHTML=`<div class="sp-town">${t.n}</div><p style="color:var(--on-dark)">${t.l}</p><ul>${t.p.map(x=>`<li>${x}</li>`).join('')}</ul><div class="sp-actions"><button class="btn" type="button" id="spSuite">Ver ${r.n}</button><button class="btn ghost" type="button" id="spAgain">Otro destino</button></div>`;
   spBody.classList.add('in');
+  if(!reduce)spCard.animate([{transform:'perspective(1200px) rotateY(-24deg) scale(.94)',opacity:.4},{transform:'none',opacity:1}],{duration:750,easing:'cubic-bezier(.2,.7,.2,1)'});
   $('spSuite').onclick=()=>openRoom(t.s);$('spAgain').onclick=shuffle;
 }
 function shuffle(){
@@ -900,6 +921,50 @@ function onScroll(){
 }
 addEventListener('scroll',onScroll,{passive:true});onScroll();
 
+/* ---------- inclinar el teléfono: el fondo del inicio se mueve en profundidad ---------- */
+let tiltOn=false;
+function startTilt(){
+  if(tiltOn||reduce)return;tiltOn=true;
+  addEventListener('deviceorientation',e=>{if(e.gamma==null||scrollY>innerHeight)return;
+    const x=Math.max(-1,Math.min(1,e.gamma/30)),y=Math.max(-1,Math.min(1,(e.beta-50)/40));
+    bg.style.translate=`${-x*14}px ${-y*10}px`},{passive:true});
+}
+const coarse=matchMedia('(pointer:coarse)').matches;
+// Android lo da sin pedir permiso; iPhone lo pide al tocar "Mover con el teléfono"
+if(coarse&&window.DeviceOrientationEvent&&typeof DeviceOrientationEvent.requestPermission!=='function')startTilt();
+
+/* ---------- tarjetas y fotos que se inclinan en 3D con el ratón ---------- */
+if(matchMedia('(hover:hover) and (pointer:fine)').matches&&!reduce){
+  document.documentElement.classList.add('tilt-on');
+  const sel='.card>button,.gal figure';
+  document.addEventListener('pointermove',e=>{const t=e.target.closest(sel);if(!t)return;
+    const r=t.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+    t.classList.add('moving');t.style.setProperty('--ry',(x*8).toFixed(2)+'deg');t.style.setProperty('--rx',(-y*8).toFixed(2)+'deg')},{passive:true});
+  document.addEventListener('pointerleave',e=>{const t=e.target;if(!t.matches||!t.matches(sel))return;
+    t.classList.remove('moving');t.style.removeProperty('--rx');t.style.removeProperty('--ry')},true);
+}
+
+/* ---------- carruseles del teléfono: contador y barra de avance ---------- */
+document.querySelectorAll('.swipe').forEach(sw=>{
+  const n=sw.id==='grid'?$('gridN'):(()=>{const p=document.createElement('p');p.className='swipe-n';p.setAttribute('aria-hidden','true');sw.after(p);return p})();
+  n.innerHTML='<span></span><i></i><span>Desliza</span>';
+  const upd=()=>{const items=[...sw.children];if(!items.length)return;
+    const w=items[0].getBoundingClientRect().width+12,i=Math.min(items.length-1,Math.round(sw.scrollLeft/w));
+    n.firstChild.textContent=`${i+1} / ${items.length}`;n.querySelector('i').style.setProperty('--p',(i+1)/items.length)};
+  sw.addEventListener('scroll',()=>requestAnimationFrame(upd),{passive:true});addEventListener('resize',upd);setTimeout(upd,50);
+});
+// al cambiar la búsqueda de habitación, volver al inicio del carrusel
+document.querySelectorAll('#finder input,#reset').forEach(i=>i.addEventListener(i.id==='reset'?'click':'change',()=>$('grid').scrollTo({left:0,behavior:reduce?'auto':'smooth'})));
+
+/* ---------- detalles de habitación: deslizar hacia abajo para cerrar (teléfono) ---------- */
+{let y0=null,dy=0;
+ dlg.addEventListener('touchstart',e=>{y0=dlg.scrollTop<=0?e.touches[0].clientY:null;dy=0},{passive:true});
+ dlg.addEventListener('touchmove',e=>{if(y0==null)return;dy=Math.max(0,e.touches[0].clientY-y0);dlg.style.transform=dy?`translateY(${dy}px)`:''},{passive:true});
+ dlg.addEventListener('touchend',()=>{if(y0==null)return;dlg.style.transition='transform 200ms';
+   if(dy>110){dlg.style.transform='translateY(100%)';setTimeout(()=>{dlg.close();dlg.style.transform='';dlg.style.transition=''},200)}
+   else{dlg.style.transform='';setTimeout(()=>dlg.style.transition='',200)}y0=null});
+}
+
 /* ---------- títulos de sección: suben palabra a palabra ---------- */
 if(!reduce){
   const hio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');hio.unobserve(e.target)}}),{threshold:.4});
@@ -934,8 +999,12 @@ if(!reduce){
 }
 
 /* ---------- revelado de imágenes ---------- */
-const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.2});
-document.querySelectorAll('.clip').forEach(el=>io.observe(el));
+// en un carrusel, las fotos de la derecha nunca "entran" de arriba abajo: se revelan todas cuando entra el carrusel
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){
+  (e.target.classList.contains('swipe')?e.target.querySelectorAll('.clip'):[e.target]).forEach(c=>c.classList.add('in'));io.unobserve(e.target)}}),{threshold:.2});
+const phoneSwipe=matchMedia('(max-width:600px)').matches;
+document.querySelectorAll('.clip').forEach(el=>{if(!(phoneSwipe&&el.closest('.swipe')))io.observe(el)});
+if(phoneSwipe)document.querySelectorAll('.swipe').forEach(s=>io.observe(s));
 
 /* ---------- cursor propio ---------- */
 const cur=$('cur');
@@ -1169,6 +1238,19 @@ function init3d(){
   bDay.addEventListener('click',()=>{state.nightT=state.nightT?0:1;sync()});
   bSpin.addEventListener('click',()=>{state.spin=!state.spin;sync()});
   views.forEach(b=>b.addEventListener('click',()=>{state.view=b.dataset.view;state.yaw=0;state.pit=0;sync()}));
+  // girar la maqueta inclinando el teléfono
+  const bG=$('cGyro');
+  if(coarse&&window.DeviceOrientationEvent&&!reduce){
+    bG.hidden=false;let on=false;
+    const h=e=>{if(e.gamma==null)return;state.mx=Math.max(-1,Math.min(1,e.gamma/25));state.my=Math.max(-1,Math.min(1,(e.beta-50)/35))};
+    bG.addEventListener('click',async()=>{
+      if(!on&&typeof DeviceOrientationEvent.requestPermission==='function'){
+        try{if(await DeviceOrientationEvent.requestPermission()!=='granted')return}catch(e){return}startTilt()}
+      on=!on;bG.setAttribute('aria-pressed',on);bG.textContent=on?'Movimiento: activado':'Mover con el teléfono';
+      if(on){addEventListener('deviceorientation',h,{passive:true});if(state.view!=='libre'){state.view='libre';sync()}}
+      else{removeEventListener('deviceorientation',h);state.mx=state.my=0}
+    });
+  }
   sl.addEventListener('input',()=>{state.manual=sl.value/100});
   $('cReset').addEventListener('click',()=>{Object.assign(state,{yaw:0,pit:0,view:'libre',spin:false,manual:null,nightT:0});sync()});
   sync();
