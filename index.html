@@ -54,6 +54,14 @@ nav{display:flex;gap:var(--s5);align-items:center}
 nav a:not(.btn){text-decoration:none;font-size:15px;color:var(--on-dark);padding:var(--s2) 0;border-bottom:2px solid transparent;transition:color 150ms var(--ease),border-color 150ms var(--ease)}
 nav a:not(.btn):hover{color:#fff;border-color:var(--gold)}
 nav .btn{min-height:40px;padding:0 var(--s4);font-size:15px}
+.menu-btn{display:none;align-items:center;gap:var(--s2);min-height:44px;padding:0 var(--s4);border:1px solid var(--ink-3);border-radius:4px;background:transparent;color:var(--stone);font-size:15px;font-weight:600;cursor:pointer}
+.bars,.bars::before,.bars::after{display:block;width:18px;height:2px;background:currentColor;border-radius:1px;transition:transform 200ms var(--ease),background-color 200ms var(--ease)}
+.bars{position:relative}
+.bars::before,.bars::after{content:"";position:absolute;left:0}
+.bars::before{top:-6px}.bars::after{top:6px}
+header.open .bars{background:transparent}
+header.open .bars::before{transform:translateY(6px) rotate(45deg)}
+header.open .bars::after{transform:translateY(-6px) rotate(-45deg)}
 
 /* hero */
 .hero{position:relative;isolation:isolate;min-height:94svh;display:flex;align-items:flex-end;color:var(--stone);padding:120px 0 var(--s9);background:var(--ink);overflow:hidden}
@@ -341,7 +349,12 @@ footer .draft{flex-basis:100%;color:#9fb0b2;font-size:14px;border-top:1px solid 
 @media(hover:hover) and (pointer:fine){#cur{display:flex}}
 
 @media(max-width:960px){
-  nav a:not(.btn){display:none}
+  .menu-btn{display:inline-flex}
+  header nav{position:absolute;top:64px;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;padding:var(--s2) var(--s5) var(--s5);background:var(--ink);border-top:1px solid var(--ink-3);box-shadow:0 16px 32px -12px rgba(0,0,0,.5);display:none;max-height:calc(100svh - 64px);overflow:auto}
+  header.open nav{display:flex}
+  header nav a:not(.btn){font-size:18px;padding:var(--s3) 0;border-bottom:1px solid var(--ink-3)}
+  header nav a:not(.btn):hover{border-color:var(--ink-3)}
+  header nav .btn{margin-top:var(--s4);min-height:48px;font-size:16px}
   .book{grid-template-columns:1fr 1fr}.book .btn{grid-column:1/-1}
   .tour{height:600vh}
   .tour-in{grid-template-columns:1fr;grid-template-rows:46svh 1fr}
@@ -365,6 +378,18 @@ footer .draft{flex-basis:100%;color:#9fb0b2;font-size:14px;border-top:1px solid 
   .evform{padding:var(--s5)}.evform .two{grid-template-columns:1fr}
   .ck{bottom:84px;left:var(--s3);right:var(--s3);max-width:none}
   .tour-panel h2{font-size:26px}
+  .tour{height:340vh}
+  .tour-in{grid-template-rows:50svh 1fr}
+  .hint{font-size:13px;right:var(--s3)}
+  .ctl{flex-wrap:nowrap;overflow-x:auto;gap:6px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .ctl::-webkit-scrollbar{display:none}
+  .ctl>*{flex:none}
+  .ctl button,.rng{min-height:36px;font-size:13px;padding:0 10px}
+  .rng input{width:80px}
+  .tour-panel{padding:var(--s4) var(--s4) 0}
+  .zone p{font-size:15px}
+  .ck{padding:var(--s3) var(--s4);font-size:13px;gap:var(--s2)}
+  .ck .btn{min-height:36px;font-size:14px}
   .sticky{display:flex;position:fixed;inset:auto 0 0 0;z-index:30;padding:var(--s3) var(--s4);background:var(--ink);gap:var(--s3)}
   .sticky .btn{flex:1;min-height:48px}
 }
@@ -386,7 +411,8 @@ footer .draft{flex-basis:100%;color:#9fb0b2;font-size:14px;border-top:1px solid 
 
 <header><div class="wrap">
   <a class="logo" href="#top" aria-label="Hotel Chicamocha, inicio">Hotel Chicamocha<small>Bucaramanga</small></a>
-  <nav aria-label="Principal">
+  <button type="button" class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mainNav"><span class="bars" aria-hidden="true"></span>Menú</button>
+  <nav aria-label="Principal" id="mainNav">
     <a href="#recorrido">Recorrido</a>
     <a href="#habitaciones">Habitaciones</a>
     <a href="#eventos">Eventos</a>
@@ -676,6 +702,14 @@ footer .draft{flex-basis:100%;color:#9fb0b2;font-size:14px;border-top:1px solid 
 (()=>{
 const $=id=>document.getElementById(id);
 const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+{ // menú del teléfono
+  const hd=document.querySelector('header'),mb=document.getElementById('menuBtn');
+  const setMenu=o=>{hd.classList.toggle('open',o);mb.setAttribute('aria-expanded',o)};
+  mb.addEventListener('click',()=>setMenu(!hd.classList.contains('open')));
+  document.getElementById('mainNav').addEventListener('click',e=>{if(e.target.closest('a'))setMenu(false)});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&hd.classList.contains('open')){setMenu(false);mb.focus()}});
+  document.addEventListener('click',e=>{if(!hd.contains(e.target))setMenu(false)});
+}
 const WA='https://wa.me/573123290527?text=';
 
 /* ---------- habitaciones (datos publicados por el hotel) ---------- */
@@ -863,8 +897,9 @@ function goZone(i){if(document.body.classList.contains('no3d')){setZone(i);retur
 function init3d(){
   const host=$('stage'),tip=$('tip'),tag=$('tag');
   let renderer;
-  try{renderer=new THREE.WebGLRenderer({antialias:true,alpha:true})}catch(e){document.body.classList.add('no3d');setZone(0);return}
-  renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+  const small=innerWidth<700;
+  try{renderer=new THREE.WebGLRenderer({antialias:!small,alpha:true,powerPreference:small?'low-power':'default'})}catch(e){document.body.classList.add('no3d');setZone(0);return}
+  renderer.setPixelRatio(Math.min(devicePixelRatio,small?1.5:2));
   const cvEl=renderer.domElement;
   cvEl.setAttribute('role','img');
   cvEl.setAttribute('aria-label','Maqueta 3D interactiva del hotel sobre el cañón. Se separa por niveles al hacer scroll y se puede girar con el dedo o el ratón.');
