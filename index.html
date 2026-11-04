@@ -1,0 +1,1084 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hotel Chicamocha · Bucaramanga</title>
+<meta name="description" content="Hotel Chicamocha en Bucaramanga: recorre el edificio en 3D, encuentra tu habitación y deja que Santander te sorprenda. Reserva por WhatsApp o llámanos.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600&family=Prata&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js')</script>
+<style>
+/* Propuesta de rediseño. Fotos © Hotel Chicamocha; sustituir por material con autorización del hotel. */
+:root{
+  --ink:#172326;--ink-2:#22343a;--ink-3:#34484e;
+  --mut:#4f6167;--stone:#f3f5f4;--stone-2:#e5eaea;--line:#cfd8d8;
+  --glass:#0f7f95;--glass-dk:#0b6477;--gold:#c4ab7b;--on-dark:#d6e0e0;
+  --s1:4px;--s2:8px;--s3:12px;--s4:16px;--s5:24px;--s6:32px;--s7:48px;--s8:64px;--s9:96px;
+  --serif:"Prata",Georgia,serif;
+  --sans:"Hanken Grotesk",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --ease:cubic-bezier(.2,.7,.2,1);--ease-io:cubic-bezier(.77,0,.18,1);
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{font:400 17px/1.6 var(--sans);color:var(--ink);background:var(--stone);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+button{font:inherit;color:inherit}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.12;letter-spacing:-.005em}
+h2{font-size:clamp(30px,4.2vw,46px)}
+h3{font-size:24px}
+p{max-width:62ch}
+.wrap{max-width:1180px;margin-inline:auto;padding-inline:var(--s5)}
+.skip{position:absolute;left:var(--s4);top:-60px;background:var(--gold);color:var(--ink);padding:var(--s2) var(--s4);border-radius:4px;z-index:60;font-weight:600}
+.skip:focus{top:var(--s3)}
+:focus-visible{outline:3px solid var(--glass);outline-offset:3px}
+header :focus-visible,.hero :focus-visible,.on-dark :focus-visible,dialog :focus-visible{outline-color:var(--gold)}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--s2);min-height:48px;padding:0 var(--s5);border-radius:4px;border:1px solid transparent;font:600 16px/1 var(--sans);text-decoration:none;cursor:pointer;background:var(--gold);color:var(--ink);transition:background-color 150ms var(--ease),transform 150ms var(--ease)}
+.btn:hover{background:#d2bd91}
+.btn:active{transform:translateY(1px)}
+.btn.ghost{background:transparent;color:inherit;border-color:currentColor}
+.btn.ghost:hover{background:rgba(255,255,255,.1)}
+.btn.dark{background:var(--ink);color:var(--stone)}
+.btn.dark:hover{background:var(--ink-2)}
+
+/* cabecera + progreso */
+header{position:fixed;inset:0 0 auto;z-index:40;background:rgba(23,35,38,.92);backdrop-filter:blur(8px);color:var(--stone)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+#bar{position:absolute;left:0;bottom:0;height:2px;width:100%;background:var(--gold);transform:scaleX(0);transform-origin:left}
+.logo{font:400 21px/1 var(--serif);text-decoration:none;color:var(--gold)}
+.logo small{display:block;font:500 11px/1.4 var(--sans);color:var(--on-dark);letter-spacing:.14em;margin-top:2px}
+nav{display:flex;gap:var(--s5);align-items:center}
+nav a:not(.btn){text-decoration:none;font-size:15px;color:var(--on-dark);padding:var(--s2) 0;border-bottom:2px solid transparent;transition:color 150ms var(--ease),border-color 150ms var(--ease)}
+nav a:not(.btn):hover{color:#fff;border-color:var(--gold)}
+nav .btn{min-height:40px;padding:0 var(--s4);font-size:15px}
+
+/* hero */
+.hero{position:relative;isolation:isolate;min-height:94svh;display:flex;align-items:flex-end;color:var(--stone);padding:120px 0 var(--s9);background:var(--ink);overflow:hidden}
+.hero .bgs{position:absolute;inset:-6% 0;height:112%;z-index:-2;will-change:transform}
+.bgs img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 40%;opacity:0;transition:opacity 1400ms ease}
+.bgs img.on{opacity:1;animation:kb 9s ease-out forwards}
+@keyframes kb{from{transform:scale(1)}to{transform:scale(1.08)}}
+.hero::before{content:"";position:absolute;inset:0;background:rgba(15,26,28,.68);z-index:-1}
+.hero h1{font-size:clamp(38px,6.4vw,76px);max-width:16ch;margin-bottom:var(--s4)}
+.w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.08em}
+.w>span{display:inline-block;transform:translateY(105%);animation:up 900ms var(--ease) forwards;animation-delay:calc(var(--i)*70ms + 150ms)}
+@keyframes up{to{transform:none}}
+.hero .lead{font-size:clamp(17px,1.6vw,20px);max-width:48ch;color:var(--on-dark);margin-bottom:var(--s6)}
+.hero-actions{display:flex;gap:var(--s3);flex-wrap:wrap}
+.clock{margin-top:var(--s5);font-size:15px;color:var(--on-dark);font-variant-numeric:tabular-nums}
+.fadein{opacity:0;animation:fi 900ms var(--ease) 900ms forwards}
+@keyframes fi{to{opacity:1}}
+
+/* reserva */
+.book-wrap{position:relative;z-index:3;margin-top:calc(var(--s9) * -.55)}
+.book .edades{grid-column:1/-1}
+.book input::placeholder{color:#6b7c81}
+.book{background:var(--stone);border:1px solid var(--line);border-radius:6px;padding:var(--s5);display:grid;grid-template-columns:1fr 1fr .7fr .7fr 1.3fr auto;gap:var(--s4);align-items:end;box-shadow:0 1px 2px rgba(23,35,38,.08),0 16px 40px -12px rgba(23,35,38,.28)}
+.book label{display:block;font-size:14px;font-weight:600;color:var(--mut);margin-bottom:var(--s1)}
+.book input,.book select{width:100%;min-height:48px;padding:0 var(--s3);border:1px solid var(--line);border-radius:4px;font:inherit;color:var(--ink);background:#fafbfb}
+.book input:hover,.book select:hover{border-color:var(--mut)}
+.book input:focus-visible,.book select:focus-visible{outline:3px solid var(--glass);outline-offset:1px;border-color:var(--glass)}
+.book-note{margin-top:var(--s3);font-size:14px;color:var(--mut);max-width:none}
+
+/* tira de servicios */
+.strip{margin-top:var(--s8);border-block:1px solid var(--line);overflow:hidden;padding:var(--s4) 0}
+.strip ul{list-style:none;padding:0;display:flex;width:max-content;animation:slide 48s linear infinite}
+.strip:hover ul{animation-play-state:paused}
+.strip li{font:400 clamp(20px,2.4vw,28px)/1.2 var(--serif);padding:0 var(--s6);white-space:nowrap;display:flex;align-items:center;gap:var(--s6)}
+.strip li::after{content:"";width:8px;height:8px;background:var(--gold);transform:rotate(45deg);flex:none}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+section{padding:80px 0}
+.head{margin-bottom:40px}
+.head p{color:var(--mut);margin-top:var(--s3)}
+
+/* recorrido 3D */
+.tour{position:relative;height:560vh;background:var(--ink);color:var(--stone);padding:0}
+.tour-in{position:sticky;top:0;height:100svh;display:grid;grid-template-columns:1.25fr 1fr;overflow:hidden}
+#stage{position:relative;min-height:0}
+#stage canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.tour-panel{position:relative;z-index:2;padding:96px var(--s7) var(--s7) var(--s5);display:flex;flex-direction:column;justify-content:center;gap:var(--s5)}
+.tour-panel h2{font-size:clamp(28px,3.4vw,44px)}
+.zone{display:grid;gap:var(--s4);transition:opacity 240ms var(--ease),transform 240ms var(--ease)}
+.zone.swap{opacity:0;transform:translateY(10px)}
+.zone img{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:6px}
+.zone p{color:var(--on-dark)}
+.zone h3{color:var(--gold);font-size:28px}
+.rail{display:flex;gap:var(--s2);flex-wrap:wrap}
+.rail button{width:36px;height:36px;border-radius:50%;border:1px solid var(--ink-3);background:transparent;cursor:pointer;position:relative;transition:background-color 150ms var(--ease),border-color 150ms var(--ease)}
+.rail button::after{content:"";position:absolute;inset:11px;border-radius:50%;background:var(--ink-3);transition:background-color 150ms var(--ease)}
+.rail button:hover{border-color:var(--gold)}
+.rail button[aria-current="true"]{border-color:var(--gold)}
+.rail button[aria-current="true"]::after{background:var(--gold)}
+.tour-note{font-size:14px;color:#9fb0b2}
+.hint{position:absolute;left:var(--s5);bottom:var(--s5);z-index:2;font-size:14px;color:var(--on-dark);pointer-events:none}
+.no3d .tour{height:auto;padding:var(--s9) 0}
+.no3d .tour-in{position:static;height:auto;grid-template-columns:1fr}
+.no3d #stage,.no3d .hint{display:none}
+
+/* habitaciones */
+.finder{display:grid;gap:var(--s4);margin-bottom:var(--s7);padding:var(--s5);border:1px solid var(--line);border-radius:6px;background:var(--stone-2)}
+.finder fieldset{border:0;padding:0;display:flex;flex-wrap:wrap;gap:var(--s2);align-items:center}
+.finder legend{float:left;margin-right:var(--s4);font-weight:600;padding:0;line-height:44px}
+.chip{position:relative}
+.chip input{position:absolute;opacity:0;inset:0;width:100%;height:100%;cursor:pointer;margin:0}
+.chip span{display:inline-flex;align-items:center;min-height:44px;padding:0 var(--s4);border:1px solid var(--mut);border-radius:999px;font-size:15px;transition:background-color 150ms var(--ease),color 150ms var(--ease)}
+.chip input:hover+span{background:#fff}
+.chip input:checked+span{background:var(--ink);color:var(--stone);border-color:var(--ink)}
+.chip input:focus-visible+span{outline:3px solid var(--glass);outline-offset:2px}
+.finder-out{display:flex;gap:var(--s4);align-items:center;justify-content:space-between;flex-wrap:wrap;min-height:28px}
+.finder-out p{font-size:16px;color:var(--ink)}
+.linkbtn{background:none;border:0;cursor:pointer;text-decoration:underline;text-underline-offset:4px;color:var(--glass-dk);font-weight:600;padding:var(--s2)}
+.linkbtn:hover{color:var(--ink)}
+.card{position:relative}
+.card>button{display:block;width:100%;text-align:left;background:var(--stone);border:1px solid var(--line);border-radius:6px;overflow:hidden;cursor:pointer;padding:0;transition:border-color 150ms var(--ease),transform 250ms var(--ease)}
+.card>button:hover{border-color:var(--ink);transform:translateY(-3px)}
+.card .ph{overflow:hidden;background:var(--stone-2)}
+.card .ph img{width:100%;height:100%;object-fit:cover;transition:transform 600ms var(--ease)}
+.card>button:hover .ph img{transform:scale(1.05)}
+.card .tx{padding:var(--s4) var(--s4) var(--s5)}
+.card h3{font-size:22px;margin-bottom:var(--s1)}
+.card .spec{font-size:15px;color:var(--mut)}
+.card .pr{margin-top:var(--s3);font:400 18px/1.2 var(--serif);font-variant-numeric:tabular-nums}
+.card.typo>button{background:var(--ink);color:var(--stone);border-color:var(--ink)}
+.card.typo .big{padding:var(--s6) var(--s4) 0;font:400 clamp(56px,6vw,84px)/1 var(--serif);color:var(--gold);font-variant-numeric:tabular-nums}
+.card.typo .big small{font-size:.3em;margin-left:var(--s1)}
+.card.typo .big .dia{display:block;width:14px;height:14px;background:var(--gold);transform:rotate(45deg);margin:var(--s5) 0 var(--s5) var(--s2)}
+.card.typo .spec{color:var(--on-dark)}
+.card.typo .dd{padding:var(--s3) var(--s4) 0;color:var(--on-dark);font-size:15px;max-width:none}
+.card.typo>button:hover{border-color:var(--gold)}
+.badge{position:absolute;top:var(--s3);left:var(--s3);z-index:2;background:var(--gold);color:var(--ink);font-size:14px;font-weight:600;padding:var(--s1) var(--s3);border-radius:999px;pointer-events:none}
+.card.top>button{border-color:var(--gold);border-width:2px}
+.fine{margin-top:var(--s5);font-size:14px;color:var(--mut);max-width:none}
+
+/* sorpresa */
+.surprise{background:var(--stone-2)}
+.sp{display:grid;grid-template-columns:1fr 1.2fr;gap:var(--s8);align-items:center}
+.sp-btn{min-height:56px;font-size:17px}
+.sp-card{position:relative;isolation:isolate;min-height:420px;border-radius:6px;overflow:hidden;background:var(--ink);color:var(--stone);display:flex;align-items:flex-end}
+.sp-card .bg{position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover;opacity:.0;transition:opacity 500ms var(--ease)}
+.sp-card.has .bg{opacity:1}
+.sp-card::before{content:"";position:absolute;inset:0;background:rgba(15,26,28,.62);z-index:-1}
+.sp-body{padding:var(--s6);display:grid;gap:var(--s4);width:100%}
+.sp-town{font:400 clamp(40px,6vw,76px)/1 var(--serif);min-height:1.1em}
+.sp-body ul{list-style:none;padding:0;display:grid;gap:var(--s2);color:var(--on-dark)}
+.sp-body li{padding-left:var(--s5);position:relative;max-width:50ch}
+.sp-body li::before{content:"";position:absolute;left:0;top:.7em;width:12px;height:1px;background:var(--gold)}
+.sp-actions{display:flex;gap:var(--s3);flex-wrap:wrap;margin-top:var(--s2)}
+.sp-body.in>*{animation:up2 600ms var(--ease) both}
+.sp-body.in>*:nth-child(2){animation-delay:80ms}.sp-body.in>*:nth-child(3){animation-delay:160ms}.sp-body.in>*:nth-child(4){animation-delay:240ms}
+@keyframes up2{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+/* galería */
+.gal{display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:150px;gap:var(--s3)}
+.gal figure{margin:0;overflow:hidden;border-radius:6px;position:relative;background:var(--stone-2)}
+.gal img{width:100%;height:100%;object-fit:cover;transition:transform 600ms var(--ease)}
+.gal figure:hover img{transform:scale(1.04)}
+.gal figcaption{position:absolute;left:var(--s3);bottom:var(--s3);background:rgba(23,35,38,.85);color:var(--stone);font-size:14px;padding:var(--s1) var(--s3);border-radius:3px}
+.js .clip img{clip-path:inset(0 0 100% 0);transition:clip-path 1000ms var(--ease-io)}
+.js .clip.in img{clip-path:inset(0)}
+.g1{grid-column:span 7;grid-row:span 3}.g2{grid-column:span 5;grid-row:span 2}.g3{grid-column:span 5;grid-row:span 2}
+.g4{grid-column:span 4;grid-row:span 2}.g5{grid-column:span 4;grid-row:span 2}.g6{grid-column:span 4;grid-row:span 2}
+
+/* opiniones */
+.reviews{background:var(--ink);color:var(--stone)}
+.scores{display:flex;flex-wrap:wrap;gap:var(--s7);margin-bottom:var(--s7)}
+.scores b{display:block;font:400 clamp(36px,4.4vw,56px)/1 var(--serif);color:var(--gold);font-variant-numeric:tabular-nums}
+.scores span{display:block;margin-top:var(--s2);font-size:15px;color:var(--on-dark)}
+.quotes{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:var(--s6)}
+blockquote{padding-left:var(--s5);border-left:3px solid var(--gold)}
+blockquote p{font:400 20px/1.5 var(--serif)}
+blockquote.big p{font-size:clamp(22px,2.4vw,28px)}
+blockquote cite{display:block;margin-top:var(--s3);font:500 15px/1.4 var(--sans);color:var(--on-dark);font-style:normal}
+.tip{margin-top:var(--s7);padding:var(--s4) var(--s5);background:var(--ink-2);border-radius:6px;max-width:68ch;font-size:16px;color:var(--on-dark)}
+
+/* ubicación */
+.loc{display:grid;grid-template-columns:1fr 1.1fr;gap:var(--s8);align-items:start}
+.loc address{font-style:normal;margin:var(--s5) 0}
+.near{list-style:none;padding:0;margin:var(--s5) 0 var(--s6);display:grid;gap:var(--s2);max-width:46ch}
+.near li{display:flex;justify-content:space-between;gap:var(--s4);padding-bottom:var(--s2);border-bottom:1px solid var(--line);font-size:16px}
+.near span{color:var(--mut);font-variant-numeric:tabular-nums;white-space:nowrap}
+.contact a:not(.btn){color:var(--glass-dk);text-underline-offset:4px;font-weight:600}
+.contact a:not(.btn):hover{color:var(--ink)}
+.contact-actions{display:flex;gap:var(--s3);flex-wrap:wrap;margin-top:var(--s5)}
+.map{border-radius:6px;overflow:hidden;border:1px solid var(--line);aspect-ratio:4/3;background:var(--stone-2)}
+.map iframe{width:100%;height:100%;border:0}
+
+footer{background:var(--ink);color:var(--on-dark);padding:var(--s7) 0;font-size:15px;border-top:1px solid var(--ink-3)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:var(--s4) var(--s7);justify-content:space-between}
+footer p{max-width:60ch}
+.sticky{display:none}
+
+/* diálogo de habitación */
+dialog{margin:auto;border:0;padding:0;border-radius:8px;max-width:min(860px,94vw);width:100%;background:var(--ink);color:var(--stone);overflow:hidden}
+dialog::backdrop{background:rgba(10,18,20,.72);backdrop-filter:blur(4px)}
+dialog[open]{animation:pop 260ms var(--ease)}
+@keyframes pop{from{opacity:0;transform:translateY(14px) scale(.98)}to{opacity:1;transform:none}}
+.dl{display:grid;grid-template-columns:1.1fr 1fr}
+.dl .pic{background:var(--ink-2);min-height:320px}
+.dl .pic img{width:100%;height:100%;object-fit:cover}
+.dl .pic.typo{display:grid;place-items:center;font:400 64px/1 var(--serif);color:var(--gold);text-align:center;padding:var(--s5)}
+.dl .tx{padding:var(--s6);display:flex;flex-direction:column;gap:var(--s4)}
+.dl h3{font-size:30px;color:var(--gold)}
+.dl dl{display:grid;grid-template-columns:auto 1fr;gap:var(--s2) var(--s5);font-size:15px}
+.dl dt{color:var(--on-dark)}.dl dd{margin:0}
+.dl .x{position:absolute;top:var(--s3);right:var(--s3);width:44px;height:44px;border-radius:50%;border:1px solid var(--ink-3);background:rgba(23,35,38,.8);cursor:pointer;font-size:22px;line-height:1;transition:border-color 150ms var(--ease)}
+.dl .x:hover{border-color:var(--gold)}
+
+/* gastronomía */
+.on-dark{background:var(--ink);color:var(--stone)}
+.on-dark .head p{color:var(--on-dark)}
+.food{display:grid;grid-template-columns:1.1fr 1fr;gap:var(--s7) var(--s6);align-items:start}
+.dish h3{color:var(--gold);margin:var(--s4) 0 var(--s2)}
+.dish p{color:var(--on-dark)}
+.dish .ph{border-radius:6px;overflow:hidden}
+.dish .ph img{width:100%;aspect-ratio:4/3;object-fit:cover}
+.dish.low{margin-top:var(--s9)}
+.dish.wide{grid-column:1/-1;padding-top:var(--s7);border-top:1px solid var(--ink-3);display:grid;grid-template-columns:.8fr 1.2fr;gap:var(--s7);align-items:center}
+.dish.wide h3{margin:0 0 var(--s3);font-size:30px}
+.dish.wide .bk-tx{display:grid;gap:var(--s3)}
+.dish.wide .hrs{font-size:15px;color:#9fb0b2}
+.bk-ph{display:grid;grid-template-columns:1.3fr 1fr;grid-template-rows:200px 200px;gap:var(--s3)}
+.bk-ph .ph{border-radius:6px;overflow:hidden}
+.dish .bk-ph img{width:100%;height:100%;aspect-ratio:auto;object-fit:cover}
+.bk-ph .b1{grid-row:span 2}
+/* eventos */
+.ev{display:grid;grid-template-columns:1.1fr 1fr;gap:var(--s8);align-items:start}
+.evimg{border-radius:6px;overflow:hidden}
+.evimg img{width:100%;aspect-ratio:3/2;object-fit:cover}
+.evform{display:grid;gap:var(--s4);padding:var(--s6);background:var(--stone-2);border:1px solid var(--line);border-radius:6px}
+.evform label:not(.check){display:block;font-size:14px;font-weight:600;color:var(--mut);margin-bottom:var(--s1)}
+.evform input:not([type=checkbox]),.evform select,.evform textarea{width:100%;min-height:48px;padding:var(--s3);border:1px solid var(--line);border-radius:4px;font:inherit;color:var(--ink);background:#fafbfb}
+.evform input:focus-visible,.evform select:focus-visible,.evform textarea:focus-visible{outline:3px solid var(--glass);outline-offset:1px;border-color:var(--glass)}
+.evform .two{display:grid;grid-template-columns:1.3fr 1fr;gap:var(--s3)}
+.check{display:flex;gap:var(--s3);align-items:flex-start;font-size:14px;color:var(--mut)}
+.check input{width:20px;height:20px;margin-top:2px;flex:none;accent-color:var(--ink)}
+.linkbtn.inl{padding:0;font-size:inherit}
+/* preguntas */
+.faq{display:grid;grid-template-columns:.8fr 1.2fr;gap:var(--s8);align-items:start}
+.acc details{border-bottom:1px solid var(--line)}
+.acc details:first-child{border-top:1px solid var(--line)}
+.acc summary{cursor:pointer;list-style:none;padding:var(--s4) 0;font:400 20px/1.3 var(--serif);display:flex;justify-content:space-between;gap:var(--s4);align-items:center}
+.acc summary::-webkit-details-marker{display:none}
+.acc summary::after{content:"+";font:400 26px/1 var(--sans);color:var(--glass-dk);transition:transform 200ms var(--ease)}
+.acc details[open] summary::after{transform:rotate(45deg)}
+.acc details p{padding:0 0 var(--s5);color:var(--mut)}
+/* sostenibilidad */
+.eco{background:var(--stone-2);padding:var(--s8) 0}
+.eco-in{display:grid;grid-template-columns:1fr 1.3fr;gap:var(--s8);align-items:center}
+.eco ul{list-style:none;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:var(--s5) var(--s6)}
+.eco li{font-size:15px;color:var(--mut);border-top:1px solid var(--line);padding-top:var(--s3)}
+.eco li b{display:block;font:400 20px/1.2 var(--serif);color:var(--ink);margin-bottom:var(--s1)}
+/* legal */
+footer .wrap{align-items:flex-start}
+footer p b{color:var(--stone)}
+.legal{display:flex;flex-direction:column;gap:var(--s2)}
+.legal a,.linkbtn.foot{color:var(--on-dark);text-underline-offset:4px;padding:0;text-align:left;font-weight:400}
+.legal a:hover,.linkbtn.foot:hover{color:#fff}
+footer .draft{flex-basis:100%;color:#9fb0b2;font-size:14px;border-top:1px solid var(--ink-3);padding-top:var(--s4)}
+.ck{position:fixed;right:var(--s4);bottom:var(--s4);z-index:45;max-width:380px;background:var(--stone);border:1px solid var(--line);border-radius:8px;padding:var(--s4) var(--s5);box-shadow:0 1px 2px rgba(23,35,38,.08),0 16px 40px -12px rgba(23,35,38,.3);display:grid;gap:var(--s3);font-size:14px}
+.ck[hidden]{display:none}
+.ck>div{display:flex;gap:var(--s2);align-items:center;flex-wrap:wrap}
+.ck .btn{min-height:40px;padding:0 var(--s4);font-size:15px}
+#legal .lg{padding:var(--s6);display:grid;gap:var(--s3);max-height:86svh;overflow:auto}
+#legal h3{color:var(--gold)}
+#legal a{color:var(--gold);text-underline-offset:4px}
+#legal .fine{color:#9fb0b2}
+#legal .btn{justify-self:start}
+
+/* 3D ampliado */
+#stage{background:#c9dfe3;touch-action:pan-y}
+#stage canvas{cursor:grab;touch-action:pan-y}
+.hint{left:var(--s5);top:80px;bottom:auto;color:var(--ink)}
+#stage[data-mode=night] .hint{color:var(--on-dark)}
+.s-tip,.s-tag{position:absolute;left:0;top:0;z-index:3;pointer-events:none;background:var(--ink);color:var(--stone);font-size:14px;padding:var(--s1) var(--s3);border-radius:3px;white-space:nowrap}
+.s-tag{border:1px solid var(--gold);color:var(--gold)}
+.s-tip[hidden],.s-tag[hidden]{display:none}
+.ctl{position:absolute;left:var(--s4);right:var(--s4);bottom:var(--s4);z-index:3;display:flex;gap:var(--s2);flex-wrap:wrap;align-items:center}
+.ctl button{min-height:40px;padding:0 var(--s3);border-radius:4px;border:1px solid var(--ink-3);background:rgba(23,35,38,.9);color:var(--stone);font-size:14px;cursor:pointer;transition:background-color 150ms var(--ease),border-color 150ms var(--ease),color 150ms var(--ease)}
+.ctl button:hover{border-color:var(--gold)}
+.ctl button[aria-pressed=true]{background:var(--gold);color:var(--ink);border-color:var(--gold)}
+.seg{display:flex;gap:2px}
+.rng{display:flex;align-items:center;gap:var(--s2);background:rgba(23,35,38,.9);color:var(--stone);border:1px solid var(--ink-3);border-radius:4px;min-height:40px;padding:0 var(--s3);font-size:14px}
+.rng input{width:110px;accent-color:var(--gold)}
+.no3d .ctl,.no3d .s-tip,.no3d .s-tag{display:none}
+/* gastronomía: texto al lado de su foto */
+.grow{display:grid;grid-template-columns:1fr 1.15fr;gap:var(--s8);align-items:center;padding:var(--s7) 0;border-top:1px solid var(--ink-3)}
+.head+.grow{border-top:0;padding-top:0}
+.grow.flip .gt{order:2}
+.gt h3{font-size:clamp(28px,3vw,38px);color:var(--gold);margin-bottom:var(--s4)}
+.gt p{color:var(--on-dark);margin-bottom:var(--s3)}
+.gt .hrs{font-size:15px;color:#9fb0b2}
+.gp{overflow:hidden;border-radius:6px}
+.gp img{width:100%;height:100%;object-fit:cover;aspect-ratio:4/3}
+.gcol{display:grid;grid-template-columns:1.3fr 1fr;grid-template-rows:210px 210px;gap:var(--s3)}
+.gcol .b1{grid-row:span 2}
+.gcol .gp img{aspect-ratio:auto}
+/* habitaciones en rejilla pareja */
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s5)}
+.card{display:flex}
+.card>button{height:100%;display:flex;flex-direction:column}
+.card .ph{aspect-ratio:4/3}
+.card .tx{margin-top:auto}
+.card.typo>button{justify-content:space-between}
+@media(max-width:960px){
+  .grow{grid-template-columns:1fr;gap:var(--s5);padding:var(--s6) 0}
+  .grow.flip .gt{order:0}
+  .gcol{grid-template-rows:150px 150px}
+  .grid{grid-template-columns:1fr 1fr}
+  .ctl{left:var(--s3);right:var(--s3);bottom:var(--s3);flex-wrap:nowrap;overflow-x:auto}
+  .ctl>*{flex:none}
+  .hint{top:72px;left:var(--s3)}
+}
+@media(max-width:600px){.grid{grid-template-columns:1fr}}
+
+/* cursor */
+#cur{position:fixed;left:0;top:0;z-index:70;width:14px;height:14px;margin:-7px 0 0 -7px;border:1.5px solid var(--gold);border-radius:50%;pointer-events:none;display:none;transition:width 200ms var(--ease),height 200ms var(--ease),margin 200ms var(--ease),background-color 200ms var(--ease);display:none;align-items:center;justify-content:center;font-size:13px;font-weight:600;color:var(--ink)}
+#cur.on{width:76px;height:76px;margin:-38px 0 0 -38px;background:var(--gold)}
+@media(hover:hover) and (pointer:fine){#cur{display:flex}}
+
+@media(max-width:960px){
+  nav a:not(.btn){display:none}
+  .book{grid-template-columns:1fr 1fr}.book .btn{grid-column:1/-1}
+  .tour{height:600vh}
+  .tour-in{grid-template-columns:1fr;grid-template-rows:46svh 1fr}
+  .tour-panel{padding:var(--s5);justify-content:flex-start;gap:var(--s3);background:var(--ink)}
+  .zone img{display:none}
+  .sp,.loc,.ev,.faq,.eco-in{grid-template-columns:1fr;gap:var(--s7)}
+  .food{grid-template-columns:1fr}.dish.low{margin-top:0}
+  .dish.wide{grid-template-columns:1fr;gap:var(--s5)}
+  .bk-ph{grid-template-rows:160px 160px}
+  .quotes{grid-template-columns:1fr}
+  .gal{grid-template-columns:repeat(6,1fr);grid-auto-rows:120px}
+  .g1{grid-column:span 6;grid-row:span 2}.g2,.g3,.g4,.g5,.g6{grid-column:span 3;grid-row:span 2}
+  .dl{grid-template-columns:1fr}.dl .pic{min-height:220px;max-height:260px}
+}
+@media(max-width:600px){
+  body{font-size:16px;padding-bottom:72px}
+  section{padding:var(--s8) 0}
+  .hero{padding-bottom:var(--s8)}
+  .book{grid-template-columns:1fr}
+  .eco ul{grid-template-columns:1fr}
+  .evform{padding:var(--s5)}.evform .two{grid-template-columns:1fr}
+  .ck{bottom:84px;left:var(--s3);right:var(--s3);max-width:none}
+  .tour-panel h2{font-size:26px}
+  .sticky{display:flex;position:fixed;inset:auto 0 0 0;z-index:30;padding:var(--s3) var(--s4);background:var(--ink);gap:var(--s3)}
+  .sticky .btn{flex:1;min-height:48px}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .w>span{transform:none;animation:none}
+  .fadein{opacity:1;animation:none}
+  .strip ul{animation:none;flex-wrap:wrap;width:auto}
+  .js .clip img{clip-path:none;transition:none}
+  .card>button,.card .ph img,.gal img{transition:none}
+  .zone{transition:none}
+  dialog[open],.sp-body.in>*{animation:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#habitaciones">Ir a habitaciones</a>
+<div id="cur" aria-hidden="true"></div>
+
+<header><div class="wrap">
+  <a class="logo" href="#top" aria-label="Hotel Chicamocha, inicio">Hotel Chicamocha<small>Bucaramanga</small></a>
+  <nav aria-label="Principal">
+    <a href="#recorrido">Recorrido</a>
+    <a href="#habitaciones">Habitaciones</a>
+    <a href="#eventos">Eventos</a>
+    <a href="#santander">Santander</a>
+    <a href="#opiniones">Opiniones</a>
+    <a href="#contacto">Cómo llegar</a>
+    <a class="btn" href="#reservar">Reservar</a>
+  </nav>
+</div><div id="bar"></div></header>
+
+<main id="top">
+<div class="hero">
+  <div class="bgs" id="heroBg">
+    <img class="on" src="img/hero.jpg" alt="Fachada del Hotel Chicamocha, torre de vidrio turquesa en Bucaramanga" width="1920" height="1080" fetchpriority="high">
+    <img src="img/terraza.jpg" alt="" width="1920" height="1282">
+    <img src="img/lobby.jpg" alt="" width="1920" height="1282">
+    <img src="img/suite-barichara.jpg" alt="" width="1920" height="1282">
+  </div>
+  <div class="wrap">
+    <h1 id="h1">Tu hotel amigo en el corazón de Bucaramanga</h1>
+    <p class="lead fadein">160 habitaciones, desayuno buffet con comida santandereana, piscina, spa y parqueadero. Recepción abierta las 24 horas.</p>
+    <div class="hero-actions fadein">
+      <a class="btn" href="#reservar">Consultar disponibilidad</a>
+      <a class="btn ghost" href="#recorrido">Recorrer el hotel en 3D</a>
+    </div>
+    <p class="clock fadein" id="clock" aria-live="off">Recepción abierta, a cualquier hora.</p>
+  </div>
+</div>
+
+<div class="book-wrap" id="reservar"><div class="wrap">
+  <form class="book" id="bookForm" aria-label="Consultar disponibilidad por WhatsApp">
+    <div><label for="entrada">Llegada</label><input id="entrada" type="date" required></div>
+    <div><label for="salida">Salida</label><input id="salida" type="date" required></div>
+    <div><label for="adultos">Adultos</label>
+      <select id="adultos"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5 o más</option></select></div>
+    <div><label for="ninos">Niños</label>
+      <select id="ninos"><option>0</option><option>1</option><option>2</option><option>3</option><option>4 o más</option></select></div>
+    <div><label for="pref">Tipo de habitación</label>
+      <select id="pref"><option>Sin preferencia</option></select></div>
+    <div id="edadesW" class="edades" hidden><label for="edades">Edades de los niños</label><input id="edades" type="text" placeholder="Ej.: 4 y 9 años" autocomplete="off"></div>
+    <button class="btn dark" type="submit">Pedir disponibilidad</button>
+  </form>
+  <p class="book-note">Te respondemos por WhatsApp con tarifa y disponibilidad para tus fechas. Check-in desde las 3:00 p. m., check-out hasta la 1:00 p. m.</p>
+</div></div>
+
+<div class="strip" aria-label="Servicios del hotel"><ul id="strip">
+  <li>Desayuno buffet santandereano</li><li>Piscina al aire libre</li><li>Spa, sauna y jacuzzi</li><li>Restaurante La Terraza</li><li>Restaurante Zaborarte</li><li>Parqueadero gratuito</li><li>Ocho salones para eventos</li><li>Gimnasio</li><li>Recepción 24 horas</li>
+</ul></div>
+
+<section class="tour" id="recorrido" aria-label="Recorrido por el hotel"><div class="tour-in" id="tourIn">
+  <div id="stage" data-mode="day">
+    <p class="hint" id="hint">Arrastra para girar. Toca un nivel para ir a su zona.</p>
+    <div id="tip" class="s-tip" hidden></div><div id="tag" class="s-tag" hidden></div>
+    <div class="ctl" id="ctl" role="group" aria-label="Controles de la maqueta 3D">
+      <button type="button" id="cDay" aria-pressed="false">Modo noche</button>
+      <button type="button" id="cSpin" aria-pressed="false">Giro automático</button>
+      <div class="seg" role="group" aria-label="Vista de la cámara">
+        <button type="button" data-view="libre" aria-pressed="true">Libre</button>
+        <button type="button" data-view="fachada" aria-pressed="false">Fachada</button>
+        <button type="button" data-view="aerea" aria-pressed="false">Aérea</button>
+      </div>
+      <label class="rng">Despiece <input type="range" id="cExp" min="0" max="100" value="0"></label>
+      <button type="button" id="cReset">Restablecer</button>
+    </div>
+  </div>
+  <div class="tour-panel">
+    <h2>Recorre el hotel por dentro</h2>
+    <div class="zone" id="zone"><h3 id="zT"></h3><p id="zP"></p><img id="zI" alt="" width="1920" height="1200"></div>
+    <div class="rail" id="rail" role="group" aria-label="Zonas del hotel"></div>
+    <p class="tour-note">Esquema ilustrativo, no corresponde a los pisos reales.</p>
+  </div>
+</div></section>
+
+<section id="habitaciones"><div class="wrap">
+  <div class="head"><h2>Encuentra tu habitación</h2><p>Dinos cómo viajas y qué buscas. Te mostramos primero lo que mejor encaja.</p></div>
+  <div class="finder" id="finder">
+    <fieldset><legend>Viajo</legend>
+      <label class="chip"><input type="radio" name="who" value="solo"><span>solo</span></label>
+      <label class="chip"><input type="radio" name="who" value="pareja"><span>en pareja</span></label>
+      <label class="chip"><input type="radio" name="who" value="familia"><span>en familia</span></label>
+      <label class="chip"><input type="radio" name="who" value="amigos"><span>con amigos</span></label>
+      <label class="chip"><input type="radio" name="who" value="trabajo"><span>por trabajo</span></label>
+    </fieldset>
+    <fieldset><legend>Busco</legend>
+      <label class="chip"><input type="radio" name="want" value="practico"><span>algo práctico</span></label>
+      <label class="chip"><input type="radio" name="want" value="espacio"><span>más espacio</span></label>
+      <label class="chip"><input type="radio" name="want" value="especial"><span>un detalle especial</span></label>
+    </fieldset>
+    <div class="finder-out"><p id="finderMsg" aria-live="polite">Elige una opción o explora las 12 habitaciones.</p><button class="linkbtn" type="button" id="reset">Borrar elección</button></div>
+  </div>
+  <div class="grid" id="grid"></div>
+  <p class="fine">Tarifas de referencia por noche, con IVA. Cambian según la fecha y el tipo de cama; confirmamos el valor exacto antes de reservar. Las medidas y camas son las publicadas por el hotel.</p>
+</div></section>
+
+<section class="on-dark" id="gastronomia"><div class="wrap">
+  <div class="head"><h2>Para comer bien sin salir del hotel</h2><p>Dos restaurantes y un desayuno buffet que los huéspedes mencionan en casi todas las reseñas.</p></div>
+
+  <article class="grow">
+    <div class="gt">
+      <h3>La Terraza by Cavamar Mediterráneo</h3>
+      <p>Un espacio donde la gastronomía, el servicio y el ambiente se unen en una misma mesa. Pescados y mariscos frescos, cortes premium, pastas y ensaladas, cocina internacional y los sabores tradicionales de Santander.</p>
+      <p>Con una carta de vinos, cócteles y bebidas para un desayuno, un almuerzo de negocios, una cena especial o una celebración.</p>
+    </div>
+    <div class="gp clip"><img src="img/restaurante.webp" alt="Restaurante La Terraza by Cavamar Mediterráneo, con mesas negras y sillas verdes" width="740" height="525" loading="lazy"></div>
+  </article>
+
+  <article class="grow flip">
+    <div class="gt">
+      <h3>Zaborarte</h3>
+      <p>Nace como una propuesta que une los sabores del mar, la cocina mediterránea y la riqueza de la tradición santandereana.</p>
+      <p>Un ambiente elegante, acogedor y pensado para compartir.</p>
+    </div>
+    <div class="gp clip"><img src="img/zaborarte.webp" alt="Restaurante Zaborarte con mesas vestidas de blanco" width="740" height="525" loading="lazy"></div>
+  </article>
+
+  <article class="grow">
+    <div class="gt">
+      <h3>Desayuno buffet</h3>
+      <p>Empieza el día con energía gracias a un desayuno completo: frutas frescas, panes artesanales, jugos naturales, cereales, huevos al gusto, café colombiano y opciones típicas de la región.</p>
+      <p>Un espacio ideal para compartir en familia o relajarte antes de una jornada de trabajo o de turismo.</p>
+      <p class="hrs">Pregunta por los horarios al reservar. Los publicamos apenas el hotel nos los confirme.</p>
+    </div>
+    <div class="gcol">
+      <div class="gp clip b1"><img src="img/buffet-linea.webp" alt="Mesa larga del buffet de desayuno con frutas, panes y platos calientes" width="1522" height="1080" loading="lazy"></div>
+      <div class="gp clip b2"><img src="img/buffet-frutas.webp" alt="Tazones con frutas frescas del buffet" width="1522" height="1080" loading="lazy"></div>
+      <div class="gp clip b3"><img src="img/buffet-postres.webp" alt="Postres del buffet sobre bandejas" width="1522" height="1080" loading="lazy"></div>
+    </div>
+  </article>
+</div></section>
+
+<section id="eventos"><div class="wrap ev">
+  <div>
+    <h2>Eventos y bodas</h2>
+    <p style="margin:var(--s4) 0 var(--s5);color:var(--mut)">Ocho salones y un auditorio con tecnología y equipo especializado. Para bodas armamos paquetes a la medida: salón decorado, gastronomía, alojamiento para los invitados y la suite nupcial.</p>
+    <div class="ph clip evimg"><img src="img/salon.jpg" alt="Salón Chicamocha montado para un evento" width="1920" height="1282" loading="lazy"></div>
+  </div>
+  <form class="evform" id="evForm" aria-label="Pedir cotización de evento">
+    <h3>Pide tu cotización</h3>
+    <div><label for="evNom">Nombre</label><input id="evNom" required autocomplete="name"></div>
+    <div><label for="evMail">Correo</label><input id="evMail" type="email" required autocomplete="email"></div>
+    <div class="two"><div><label for="evTipo">Tipo de evento</label><select id="evTipo"><option>Boda</option><option>Evento corporativo</option><option>Celebración social</option><option>Reunión o capacitación</option></select></div>
+    <div><label for="evPax">Invitados (aprox.)</label><input id="evPax" type="number" min="1" inputmode="numeric"></div></div>
+    <div><label for="evFecha">Fecha tentativa</label><input id="evFecha" type="date"></div>
+    <div><label for="evMsg">Cuéntanos más</label><textarea id="evMsg" rows="3"></textarea></div>
+    <label class="check"><input type="checkbox" id="evOk" required><span>Autorizo el tratamiento de mis datos para recibir esta cotización, según la <button type="button" class="linkbtn inl" data-legal>política de datos</button>.</span></label>
+    <button class="btn dark" type="submit">Enviar solicitud</button>
+    <p class="fine" style="margin:0">Se abrirá tu correo con el mensaje listo para enviar a ventas de eventos.</p>
+  </form>
+</div></section>
+
+<section class="surprise" id="santander"><div class="wrap sp">
+  <div>
+    <h2>Santander te espera. ¿Adónde vas primero?</h2>
+    <p style="margin:var(--s4) 0 var(--s6);color:var(--mut)">Cuatro de nuestras suites llevan el nombre de pueblos santandereanos. Deja que el azar elija tu escapada y la suite que la acompaña.</p>
+    <button class="btn dark sp-btn" id="spBtn" type="button">Sorpréndeme</button>
+  </div>
+  <div class="sp-card" id="spCard" aria-live="polite">
+    <img class="bg" id="spImg" src="" alt="" width="1920" height="1280">
+    <div class="sp-body" id="spBody">
+      <div class="sp-town" id="spTown">Elige tu destino</div>
+      <p id="spLine" style="color:var(--on-dark)">Pulsa el botón y descubre un plan para tu estancia.</p>
+    </div>
+  </div>
+</div></section>
+
+<section id="galeria"><div class="wrap">
+  <div class="head"><h2>Rincones del hotel</h2></div>
+  <div class="gal">
+    <figure class="g1 clip"><img src="img/lobby.jpg" alt="Recepción del hotel con mostrador dorado y sofás de cuero" width="1920" height="1282" loading="lazy"><figcaption>Recepción</figcaption></figure>
+    <figure class="g2 clip"><img src="img/spa.webp" alt="Cabina de spa con camilla de masaje" width="1920" height="1318" loading="lazy"><figcaption>Spa</figcaption></figure>
+    <figure class="g3 clip"><img src="img/salon.jpg" alt="Salón Chicamocha montado para un evento" width="1920" height="1282" loading="lazy"><figcaption>Salón Chicamocha</figcaption></figure>
+    <figure class="g4 clip"><img src="img/restaurante.webp" alt="Restaurante La Terraza" width="740" height="525" loading="lazy"><figcaption>La Terraza</figcaption></figure>
+    <figure class="g5 clip"><img src="img/zaborarte.webp" alt="Restaurante Zaborarte" width="740" height="525" loading="lazy"><figcaption>Zaborarte</figcaption></figure>
+    <figure class="g6 clip"><img src="img/terraza.jpg" alt="Terraza y piscina del hotel" width="1920" height="1282" loading="lazy"><figcaption>Piscina y terraza</figcaption></figure>
+  </div>
+</div></section>
+
+<section class="reviews on-dark" id="opiniones"><div class="wrap">
+  <div class="head"><h2>Lo que dicen quienes se han hospedado</h2></div>
+  <div class="scores">
+    <div><b>4,5 / 5</b><span>Google, 3.093 opiniones</span></div>
+    <div><b>8,4 / 10</b><span>Booking.com, 914 opiniones</span></div>
+    <div><b>4,1 / 5</b><span>TripAdvisor, 232 opiniones</span></div>
+  </div>
+  <div class="quotes">
+    <blockquote class="big"><p>El desayuno estuvo delicioso, con comida típica santandereana.</p><cite>Lorena, Colombia, en Booking.com</cite></blockquote>
+    <blockquote><p>Wonderful property. Breakfast was spectacular.</p><cite>Peter, Estados Unidos, en Booking.com</cite></blockquote>
+    <blockquote><p>The people are so friendly and nice. We will definitely stay here again.</p><cite>Huésped, en Google, 2024</cite></blockquote>
+  </div>
+  <p class="tip">Si buscas silencio, pide una habitación interior. Las que dan a la Calle 34 pueden oír el ambiente nocturno de la zona.</p>
+</div></section>
+
+<section id="preguntas"><div class="wrap faq">
+  <div class="head" style="margin:0"><h2>Antes de reservar</h2><p>Lo que más preguntan los huéspedes.</p></div>
+  <div class="acc">
+    <details><summary>¿A qué hora es el check-in y el check-out?</summary><p>Entras desde las 3:00 p. m. y sales hasta la 1:00 p. m. La recepción atiende las 24 horas, así que puedes llegar a cualquier hora.</p></details>
+    <details><summary>¿Aceptan mascotas?</summary><p>Se consulta caso por caso. Escríbenos antes de reservar para confirmarlo.</p></details>
+    <details><summary>¿Hay cuna para bebés?</summary><p>Sí, bajo consulta. Pídela al reservar para dejarla lista.</p></details>
+    <details><summary>¿Tienen parqueadero?</summary><p>Sí, gratuito y sujeto a disponibilidad.</p></details>
+    <details><summary>¿Qué incluyen las habitaciones?</summary><p>Wi-Fi, aire acondicionado, TV LCD y servicio a la habitación. Según el tipo de habitación también hay minibar, balcón y plancha. El hotel cuenta con ascensor, lavandería, área de juegos y accesibilidad.</p></details>
+    <details><summary>¿Cómo es la cancelación?</summary><p>Depende de la tarifa y de la fecha. Te la confirmamos por escrito antes de que reserves.</p></details>
+  </div>
+</div></section>
+
+<section class="eco" id="sostenibilidad"><div class="wrap eco-in">
+  <div>
+    <h2>Turismo responsable</h2>
+    <p style="margin-top:var(--s3);color:var(--mut)">Inversora Hotelera Colombiana S.A. trabaja con una política de turismo sostenible: cuida el ambiente, la cultura local y a las personas que viven del turismo.</p>
+  </div>
+  <ul>
+    <li><b>ICONTEC</b>Certificaciones de calidad</li>
+    <li><b>ESG Verified Pyme</b>Sello obtenido en 2025</li>
+    <li><b>Compra local</b>Preferimos proveedores de la región</li>
+    <li><b>Ley 679 de 2001</b>Compromiso contra la explotación sexual de menores</li>
+  </ul>
+</div></section>
+
+<section id="contacto"><div class="wrap loc">
+  <div class="contact">
+    <h2>Cómo llegar</h2>
+    <address>Calle 34 No. 31-24, barrio La Aurora<br>Bucaramanga, Santander</address>
+    <ul class="near" aria-label="Lugares cercanos">
+      <li>Teatro Corfescu <span>0,5 km</span></li>
+      <li>Parque del Agua <span>1,1 km</span></li>
+      <li>Parque Santander y centro <span>1,5 km</span></li>
+      <li>Aeropuerto Palonegro <span>21 km, 30 min</span></li>
+    </ul>
+    <p>Teléfono: <a href="tel:+576076343000">+57 607 634 3000</a><br>
+       WhatsApp: <a href="https://wa.me/573123290527">+57 312 329 0527</a><br>
+       Instagram: <a href="https://instagram.com/hotelchicamochabucaramanga/" rel="noopener">@hotelchicamochabucaramanga</a><br>
+       Correo: <a href="mailto:reservas.chicamocha@solarhoteles.com">reservas.chicamocha@solarhoteles.com</a></p>
+    <div class="contact-actions">
+      <a class="btn dark" href="https://wa.me/573123290527">Escribir por WhatsApp</a>
+      <a class="btn ghost" href="tel:+576076343000">Llamar</a>
+    </div>
+  </div>
+  <div class="map"><iframe title="Mapa de ubicación del Hotel Chicamocha" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=Hotel+Chicamocha+Bucaramanga&amp;z=15&amp;output=embed"></iframe></div>
+</div></section>
+</main>
+
+<!-- TODO legal: el hotel debe confirmar su Registro Nacional de Turismo (RNT) y mostrarlo aquí antes de publicar. -->
+<footer><div class="wrap">
+  <div>
+    <p><b>Inversora Hotelera Colombiana S.A.</b> · NIT 890.203.975-7</p>
+    <p>Hotel Chicamocha, Calle 34 No. 31-24, Bucaramanga, Santander. Recepción 24 horas.</p>
+  </div>
+  <nav class="legal" aria-label="Legal">
+    <button type="button" class="linkbtn foot" data-legal>Tratamiento de datos personales</button>
+    <a href="https://www.hotelchicamocha.com/politica-de-privacidade-e-cookies" target="_blank" rel="noopener">Política de privacidad y cookies</a>
+    <a href="#sostenibilidad">Sostenibilidad</a>
+  </nav>
+  <p class="draft">Propuesta de rediseño de práctica. Fotos y marca © Hotel Chicamocha; no es el sitio oficial.</p>
+</div></footer>
+
+<aside id="ck" class="ck" role="region" aria-label="Aviso de cookies" hidden>
+  <p>Este sitio carga fuentes, un mapa y gráficos 3D de terceros (Google y cdnjs), que pueden guardar cookies técnicas. No usamos cookies de publicidad.</p>
+  <div><button class="btn dark" type="button" id="ckOk">Entendido</button><button class="linkbtn" type="button" data-legal>Más información</button></div>
+</aside>
+
+<dialog id="legal" aria-labelledby="lgT"><div class="lg">
+  <h3 id="lgT">Tratamiento de datos personales</h3>
+  <p><b>Responsable:</b> Inversora Hotelera Colombiana S.A., NIT 890.203.975-7, Calle 34 No. 31-24, Bucaramanga, Santander.</p>
+  <p><b>Qué datos recibimos:</b> solo los que escribes en los formularios de este sitio (por ejemplo nombre, correo, fechas y número de personas). Se envían por WhatsApp o por correo, a tu elección.</p>
+  <p><b>Para qué los usamos:</b> responder tu solicitud de reserva o de cotización. Si quieres recibir promociones, te lo preguntamos aparte.</p>
+  <p><b>Tus derechos (Ley 1581 de 2012):</b> conocer, actualizar y rectificar tus datos; pedir que los eliminemos; revocar tu autorización y consultar a quién se los compartimos.</p>
+  <p><b>Cómo ejercerlos:</b> escribe a <a href="mailto:reservas.chicamocha@solarhoteles.com?subject=Protección%20de%20datos">reservas.chicamocha@solarhoteles.com</a> con el asunto “Protección de datos”.</p>
+  <p><b>Terceros:</b> Google (fuentes y mapa), cdnjs (gráficos 3D) y WhatsApp pueden recibir datos técnicos, como tu dirección IP, cuando usas esas funciones.</p>
+  <p class="fine" style="margin:0">Texto de referencia para esta propuesta. El hotel debe revisarlo con su asesor legal antes de publicarlo. La política completa vigente está en <a href="https://www.hotelchicamocha.com/politica-de-privacidade-e-cookies" target="_blank" rel="noopener">el sitio oficial</a>.</p>
+  <button class="btn" type="button" id="lgX">Cerrar</button>
+</div></dialog>
+
+<div class="sticky"><a class="btn" href="#reservar">Reservar</a><a class="btn ghost" style="color:var(--stone)" href="https://wa.me/573123290527">WhatsApp</a></div>
+
+<dialog id="dlg" aria-labelledby="dT"><div class="dl">
+  <div class="pic" id="dPic"></div>
+  <div class="tx">
+    <h3 id="dT"></h3>
+    <p id="dD"></p>
+    <dl id="dS"></dl>
+    <a class="btn" id="dA" href="#" target="_blank" rel="noopener">Pedir esta habitación</a>
+  </div>
+  <button class="x" id="dX" type="button" aria-label="Cerrar">&times;</button>
+</div></dialog>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+<script defer>
+(()=>{
+const $=id=>document.getElementById(id);
+const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+const WA='https://wa.me/573123290527?text=';
+
+/* ---------- habitaciones (datos publicados por el hotel) ---------- */
+const ROOMS=[
+ {id:'sencilla',n:'Estándar sencilla',m:27,bed:'1 cama queen',cap:'1 persona',d:'Práctica y tranquila para quien viaja solo. Wi-Fi, aire acondicionado y todo lo necesario.',who:['solo','trabajo'],want:['practico']},
+ {id:'doble',n:'Estándar doble',m:27,bed:'1 queen o 2 camas full',cap:'2 personas',d:'La opción de siempre bien resuelta: elige una cama grande o dos camas separadas.',who:['pareja','amigos','solo'],want:['practico']},
+ {id:'triple',n:'Triple estándar',m:27,bed:'2 individuales y 1 doble',cap:'3 personas',d:'Espacio para tres, con camas ya listas. Funciona para familias pequeñas o grupos de amigos.',who:['familia','amigos'],want:['practico'],img:'room-triple.jpg',alt:'Habitación triple estándar con camas y ventanal',pr:'Según fecha'},
+ {id:'ejecutiva',n:'Ejecutiva',m:null,bed:'Cama doble y sala',cap:'2 personas',d:'Cama doble, sala de estar y zona de trabajo. Pensada para viajes de negocios.',who:['trabajo','pareja','solo'],want:['espacio','practico'],img:'room-ejecutiva.jpg',alt:'Habitación ejecutiva con cama doble y escritorio',pr:'~ COP 189.000'},
+ {id:'junior',n:'Junior suite',m:46,bed:'1 cama king',cap:'2 personas',d:'Cama king y más metros para moverte con calma.',who:['pareja','trabajo'],want:['espacio']},
+ {id:'suite',n:'Suite',m:null,bed:'Sala y habitación',cap:'2 personas',d:'La suite clásica del hotel, con ambientes separados. Consulta las medidas al reservar.',who:['pareja','trabajo','familia'],want:['espacio']},
+ {id:'nupcial',n:'Suite Nupcial',m:null,bed:'Cama con dosel',cap:'2 personas',d:'Pensada para celebrar: dosel, telas y una puesta en escena especial.',who:['pareja'],want:['especial'],img:'suite-nupcial.jpg',alt:'Suite Nupcial con cama con dosel y decoración en tonos cálidos'},
+ {id:'barichara',n:'Suite Barichara',m:null,bed:'Suite temática',cap:'Consulta capacidad',d:'Inspirada en el pueblo de piedra más bonito de Santander.',who:['pareja','familia'],want:['especial','espacio'],img:'suite-barichara.jpg',alt:'Suite Barichara'},
+ {id:'curiti',n:'Suite Curití',m:null,bed:'Suite temática',cap:'Consulta capacidad',d:'Un guiño a la tierra del fique y de las artesanías santandereanas.',who:['pareja','familia'],want:['especial'],img:'suite-curiti.jpg',alt:'Suite Curití'},
+ {id:'giron',n:'Suite Girón',m:null,bed:'Suite temática',cap:'Consulta capacidad',d:'Inspirada en el pueblo blanco, a las afueras de Bucaramanga.',who:['pareja','amigos'],want:['especial'],img:'suite-giron.jpg',alt:'Suite Girón'},
+ {id:'sangil',n:'Suite San Gil',m:null,bed:'Suite temática',cap:'Consulta capacidad',d:'Para quien viene a Santander buscando aventura y quiere volver a descansar bien.',who:['amigos','pareja'],want:['especial']},
+ {id:'familiar',n:'Suite Familiar',m:null,bed:'Suite familiar',cap:'Consulta capacidad',d:'Más espacio para que toda la familia duerma bajo el mismo techo.',who:['familia'],want:['espacio'],img:'suite-familiar.jpg',alt:'Suite Familiar'},
+ {id:'empresarial',n:'Suite Empresarial',m:null,bed:'Suite de negocios',cap:'Consulta capacidad',d:'Espacio para trabajar y recibir, sin salir del hotel.',who:['trabajo'],want:['espacio']}
+];
+const byId=Object.fromEntries(ROOMS.map(r=>[r.id,r]));
+const grid=$('grid'),cards={},ratios=[1.25,.95,1.1,1.35,.9,1.2];
+ROOMS.forEach((r,i)=>{
+  const el=document.createElement('div');el.className='card'+(r.img?'':' typo');
+  const media=r.img
+    ?`<div class="ph" style="aspect-ratio:${'4/3'}"><img src="img/${r.img}" alt="${r.alt}" width="1920" height="1280" loading="lazy"></div>`
+    :`<div class="big">${r.m?r.m+'<small>m²</small>':'<i class="dia"></i>'}</div><p class="dd">${r.d}</p>`;
+  el.innerHTML=`<button type="button" data-cursor="Ver" aria-label="Ver detalles de ${r.n}">${media}<div class="tx"><h3>${r.n}</h3><p class="spec">${r.bed} · ${r.cap}</p>${r.pr?`<p class="pr">${r.pr}</p>`:''}</div></button>`;
+  el.firstChild.addEventListener('click',()=>openRoom(r.id));
+  cards[r.id]=el;grid.appendChild(el);
+});
+// opciones del formulario de reserva
+const pref=$('pref');ROOMS.forEach(r=>{const o=document.createElement('option');o.textContent=r.n;pref.appendChild(o)});
+{const o=document.createElement('option');o.textContent='Interior, más silenciosa';pref.appendChild(o)}
+
+function flip(change){
+  const first=new Map([...grid.children].map(e=>[e,e.getBoundingClientRect()]));
+  change();
+  if(reduce)return;
+  [...grid.children].forEach(e=>{const f=first.get(e),l=e.getBoundingClientRect();
+    const dx=f.left-l.left,dy=f.top-l.top;if(!dx&&!dy)return;
+    e.animate([{transform:`translate(${dx}px,${dy}px)`},{transform:'none'}],{duration:520,easing:'cubic-bezier(.2,.7,.2,1)'})});
+}
+function finder(){
+  const who=document.querySelector('[name=who]:checked')?.value,want=document.querySelector('[name=want]:checked')?.value;
+  const scored=ROOMS.map((r,i)=>({r,i,s:(who&&r.who.includes(who)?2:0)+(want&&r.want.includes(want)?2:0)})).sort((a,b)=>b.s-a.s||a.i-b.i);
+  const picks=who||want?scored.filter(x=>x.s>0).slice(0,3):[];
+  flip(()=>{
+    scored.forEach(x=>grid.appendChild(cards[x.r.id]));
+    Object.values(cards).forEach(c=>{c.classList.remove('top');c.querySelector('.badge')?.remove()});
+    picks.forEach(x=>{const c=cards[x.r.id];c.classList.add('top');c.insertAdjacentHTML('afterbegin','<span class="badge">Para ti</span>')});
+  });
+  $('finderMsg').textContent=picks.length?'Te recomendamos: '+picks.map(x=>x.r.n).join(', ')+'.':(who||want?'Esa combinación no tiene coincidencias exactas; mira todas las habitaciones.':'Elige una opción o explora las 12 habitaciones.');
+}
+document.querySelectorAll('#finder input').forEach(i=>i.addEventListener('change',finder));
+$('reset').addEventListener('click',()=>{document.querySelectorAll('#finder input').forEach(i=>i.checked=false);finder()});
+
+/* ---------- diálogo ---------- */
+const dlg=$('dlg');
+function openRoom(id){
+  const r=byId[id];$('dT').textContent=r.n;$('dD').textContent=r.d;
+  const pic=$('dPic');
+  if(r.img){pic.className='pic';pic.innerHTML=`<img src="img/${r.img}" alt="${r.alt}">`}
+  else{pic.className='pic typo';pic.textContent=r.m?r.m+' m²':r.n}
+  $('dS').innerHTML=`<dt>Camas</dt><dd>${r.bed}</dd><dt>Capacidad</dt><dd>${r.cap}</dd>${r.m?`<dt>Tamaño</dt><dd>${r.m} m²</dd>`:''}<dt>Tarifa</dt><dd>${r.pr||'Consulta según fecha'}</dd>`;
+  $('dA').href=WA+encodeURIComponent(`Hola, me interesa la habitación ${r.n} del Hotel Chicamocha. ¿Qué disponibilidad tienen?`);
+  dlg.showModal();
+}
+$('dX').addEventListener('click',()=>dlg.close());
+dlg.addEventListener('click',e=>{if(e.target===dlg)dlg.close()});
+
+/* ---------- sorpréndeme ---------- */
+const TOWNS=[
+ {n:'Barichara',s:'barichara',l:'Calles de piedra, casas antiguas y silencio de pueblo.',p:['Caminar por sus calles empedradas hasta el mirador','Recorrer un tramo del Camino Real hacia Guane','Volver al hotel para la piscina y cenar en La Terraza']},
+ {n:'Girón',s:'giron',l:'Fachadas blancas, malecón y un centro que se recorre a pie.',p:['Pasear por el centro histórico y el malecón','Almorzar en la plaza con calma','Regresar a Bucaramanga y cenar en Zaborarte']},
+ {n:'Curití',s:'curiti',l:'Tierra de artesanías en fique y de aguas frescas.',p:['Visitar un taller de fique y llevarte una pieza','Refrescarte en el río','Cerrar el día con un masaje en el spa']},
+ {n:'San Gil',s:'sangil',l:'La capital de la aventura en Santander.',p:['Elegir entre rafting y parapente','Almorzar sin afán en el pueblo','Descansar en la piscina y dormir en tu suite']},
+ {n:'El Cañón del Chicamocha',s:'ejecutiva',l:'El paisaje que le da nombre al hotel.',p:['Salir temprano hacia el cañón y su teleférico','Almorzar con vista al paisaje','Volver a Bucaramanga para el spa y una cena tranquila']}
+];
+let last=-1;const spBody=$('spBody'),spImg=$('spImg'),spCard=$('spCard');
+function landTown(t){
+  const r=byId[t.s];
+  if(r.img){spImg.src='img/'+r.img;spImg.alt='';spCard.classList.add('has')}else{spCard.classList.remove('has')}
+  spBody.classList.remove('in');void spBody.offsetWidth;
+  spBody.innerHTML=`<div class="sp-town">${t.n}</div><p style="color:var(--on-dark)">${t.l}</p><ul>${t.p.map(x=>`<li>${x}</li>`).join('')}</ul><div class="sp-actions"><button class="btn" type="button" id="spSuite">Ver ${r.n}</button><button class="btn ghost" type="button" id="spAgain">Otro destino</button></div>`;
+  spBody.classList.add('in');
+  $('spSuite').onclick=()=>openRoom(t.s);$('spAgain').onclick=shuffle;
+}
+function shuffle(){
+  let i;do{i=Math.floor(Math.random()*TOWNS.length)}while(i===last);last=i;
+  if(reduce){landTown(TOWNS[i]);return}
+  let k=0;const names=TOWNS.map(t=>t.n);
+  spBody.innerHTML='<div class="sp-town" id="spT"></div>';
+  const tick=setInterval(()=>{$('spT').textContent=names[k++%names.length];
+    if(k>14){clearInterval(tick);landTown(TOWNS[i])}},70);
+}
+$('spBtn').addEventListener('click',shuffle);
+
+/* ---------- hero: titular por palabras, paralaje, hora ---------- */
+const h1=$('h1');
+if(!reduce){h1.innerHTML=h1.textContent.split(' ').map((w,i)=>`<span class="w"><span style="--i:${i}">${w}</span></span>`).join(' ')}
+const bg=$('heroBg');
+if(!reduce){
+  const slides=[...bg.children];let si=0;
+  setInterval(()=>{slides[si].classList.remove('on');si=(si+1)%slides.length;slides[si].classList.add('on')},6500);
+}
+function clock(){
+  const t=new Intl.DateTimeFormat('es-CO',{hour:'numeric',minute:'2-digit',timeZone:'America/Bogota'}).format(new Date());
+  $('clock').textContent=`Son las ${t} en Bucaramanga. La recepción está abierta, siempre.`;
+}
+clock();setInterval(clock,30000);
+
+/* ---------- scroll: progreso y paralaje ---------- */
+const bar=$('bar');
+function onScroll(){
+  const h=document.documentElement,max=h.scrollHeight-innerHeight;
+  bar.style.transform=`scaleX(${max>0?scrollY/max:0})`;
+  if(!reduce&&scrollY<innerHeight*1.2)bg.style.transform=`translate3d(0,${scrollY*.18}px,0)`;
+}
+addEventListener('scroll',onScroll,{passive:true});onScroll();
+
+/* ---------- revelado de imágenes ---------- */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.2});
+document.querySelectorAll('.clip').forEach(el=>io.observe(el));
+
+/* ---------- cursor propio ---------- */
+const cur=$('cur');
+if(matchMedia('(hover:hover) and (pointer:fine)').matches&&!reduce){
+  let x=0,y=0,tx=0,ty=0;
+  addEventListener('pointermove',e=>{tx=e.clientX;ty=e.clientY;cur.style.opacity=1});
+  document.addEventListener('pointerover',e=>{const t=e.target.closest('[data-cursor]');if(t){cur.textContent=t.dataset.cursor;cur.classList.add('on')}else{cur.textContent='';cur.classList.remove('on')}});
+  (function loop(){x+=(tx-x)*.2;y+=(ty-y)*.2;cur.style.transform=`translate(${x}px,${y}px)`;requestAnimationFrame(loop)})();
+}
+
+/* ---------- reserva por WhatsApp ---------- */
+const today=new Date().toISOString().slice(0,10);
+$('entrada').min=today;
+$('entrada').addEventListener('change',()=>{$('salida').min=$('entrada').value;if($('salida').value&&$('salida').value<=$('entrada').value)$('salida').value=''});
+$('ninos').addEventListener('change',()=>{$('edadesW').hidden=$('ninos').value==='0'});
+$('bookForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  const kids=$('ninos').value!=='0'?`\nNiños: ${$('ninos').value}${$('edades').value?' ('+$('edades').value+')':''}`:'';
+  const msg=`Hola, quiero consultar disponibilidad en el Hotel Chicamocha.\nLlegada: ${$('entrada').value}\nSalida: ${$('salida').value}\nAdultos: ${$('adultos').value}${kids}\nHabitación: ${$('pref').value}`;
+  window.open(WA+encodeURIComponent(msg),'_blank','noopener');
+});
+
+/* ---------- eventos: cotización por correo ---------- */
+$('evForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  const body=`Hola, quiero cotizar un evento en el Hotel Chicamocha.\n\nNombre: ${$('evNom').value}\nCorreo: ${$('evMail').value}\nTipo: ${$('evTipo').value}\nInvitados: ${$('evPax').value||'por definir'}\nFecha tentativa: ${$('evFecha').value||'por definir'}\n\n${$('evMsg').value}\n\nAutorizo el tratamiento de mis datos para recibir esta cotización.`;
+  location.href='mailto:jefeventas.chicamocha@solarhoteles.com?subject='+encodeURIComponent('Cotización de evento: '+$('evTipo').value)+'&body='+encodeURIComponent(body);
+});
+
+/* ---------- legal y cookies ---------- */
+const legal=$('legal');
+document.querySelectorAll('[data-legal]').forEach(b=>b.addEventListener('click',()=>legal.showModal()));
+$('lgX').addEventListener('click',()=>legal.close());
+legal.addEventListener('click',e=>{if(e.target===legal)legal.close()});
+const ck=$('ck');let seen=false;
+try{seen=localStorage.getItem('hc-ck')==='1'}catch(e){}
+if(!seen)setTimeout(()=>{ck.hidden=false},2500);
+$('ckOk').addEventListener('click',()=>{ck.hidden=true;try{localStorage.setItem('hc-ck','1')}catch(e){}});
+
+/* ---------- recorrido 3D ---------- */
+const ZONES=[
+ {t:'Recepción y lobby',p:'Mármol, cuero y un mostrador dorado. Aquí te recibe alguien las 24 horas, los 365 días.',img:'lobby.jpg',a:[0]},
+ {t:'Restaurantes',p:'La Terraza, con mariscos, carnes y cocina mediterránea, y Zaborarte, con mar y tradición santandereana. Aquí también se sirve el desayuno buffet.',img:'restaurante.webp',a:[1]},
+ {t:'Salones para eventos',p:'Ocho salones y un auditorio para bodas, reuniones y celebraciones de todos los tamaños.',img:'salon.jpg',a:[2]},
+ {t:'Habitaciones',p:'Estándar, triples y ejecutivas. Camas cómodas, Wi-Fi y aire acondicionado.',img:'room-triple.jpg',a:[3,4,5,6]},
+ {t:'Suites temáticas',p:'Nupcial, Barichara, Curití, Girón y más. Cada una cuenta un rincón de Santander.',img:'suite-nupcial.jpg',a:[7,8]},
+ {t:'Spa y gimnasio',p:'Masajes, sauna, jacuzzi y salón de belleza. Y un gimnasio para entrenar sin salir.',img:'spa.webp',a:[9]},
+ {t:'Piscina y terraza',p:'Piscina al aire libre con bar. El mejor lugar para cerrar el día.',img:'terraza.jpg',a:[10]}
+];
+const rail=$('rail');
+ZONES.forEach((z,i)=>{const b=document.createElement('button');b.type='button';b.setAttribute('aria-label',z.t);b.addEventListener('click',()=>goZone(i));rail.appendChild(b)});
+const tour=$('recorrido'),zone=$('zone');let curZ=-1;
+function setZone(i){
+  if(i===curZ)return;curZ=i;
+  [...rail.children].forEach((b,k)=>b.setAttribute('aria-current',k===i));
+  const z=ZONES[i];
+  const apply=()=>{$('zT').textContent=z.t;$('zP').textContent=z.p;const im=$('zI');im.src='img/'+z.img;im.alt=z.t;zone.classList.remove('swap')};
+  if(reduce)apply();else{zone.classList.add('swap');setTimeout(apply,220)}
+}
+function progress(){const r=tour.getBoundingClientRect(),span=r.height-innerHeight;return Math.min(1,Math.max(0,-r.top/span))}
+function goZone(i){if(document.body.classList.contains('no3d')){setZone(i);return}const r=tour.getBoundingClientRect(),span=r.height-innerHeight;window.scrollTo({top:scrollY+r.top+span*((i+.5)/ZONES.length),behavior:reduce?'auto':'smooth'})}
+
+function init3d(){
+  const host=$('stage'),tip=$('tip'),tag=$('tag');
+  let renderer;
+  try{renderer=new THREE.WebGLRenderer({antialias:true,alpha:true})}catch(e){document.body.classList.add('no3d');setZone(0);return}
+  renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+  const cvEl=renderer.domElement;
+  cvEl.setAttribute('role','img');
+  cvEl.setAttribute('aria-label','Maqueta 3D interactiva del hotel sobre el cañón. Se separa por niveles al hacer scroll y se puede girar con el dedo o el ratón.');
+  host.insertBefore(cvEl,host.firstChild);
+  const scene=new THREE.Scene(),cam=new THREE.PerspectiveCamera(30,1,.1,200);
+  const DAY=new THREE.Color(0xc9dfe3),NIGHT=new THREE.Color(0x0e1a1d);
+  scene.fog=new THREE.Fog(0xc9dfe3,24,62);
+  const amb=new THREE.AmbientLight(0xbfe9f2,.85),key=new THREE.DirectionalLight(0xffffff,.95),warm=new THREE.PointLight(0xc4ab7b,.9,30);
+  key.position.set(5,9,6);warm.position.set(-5,2,5);scene.add(amb,key,warm);
+
+  const gold=0xc4ab7b,H=.34,tower=new THREE.Group();scene.add(tower);
+  const items=[],byMesh=new Map();
+
+  // texturas de ventanal: día (vidrio turquesa) y noche (ventanas encendidas)
+  function winCanvas(night){
+    const c=document.createElement('canvas');c.width=256;c.height=64;const x=c.getContext('2d');
+    x.fillStyle=night?'#0b3b46':'#14899f';x.fillRect(0,0,256,64);
+    if(night){for(let i=0;i<8;i++){if(Math.random()<.72){x.fillStyle=Math.random()<.2?'#fff3d2':'#ffd98a';x.fillRect(i*32+5,12,23,40)}}}
+    else{x.fillStyle='#4fc3d9';x.fillRect(0,6,256,10)}
+    x.fillStyle='#0a3d48';for(let i=0;i<256;i+=32)x.fillRect(i,0,3,64);
+    const t=new THREE.CanvasTexture(c);t.anisotropy=4;return t;
+  }
+  const winDay=winCanvas(false),winNight=winCanvas(true);
+
+  function mk(w,d,h,color,opacity,edge,map){
+    const g=new THREE.BoxGeometry(w,h,d);
+    const m=new THREE.MeshStandardMaterial({color,map:map||null,transparent:true,opacity,roughness:.25,metalness:.2,emissive:0x000000});
+    const mesh=new THREE.Mesh(g,m);
+    const e=new THREE.LineSegments(new THREE.EdgesGeometry(g),new THREE.LineBasicMaterial({color:edge,transparent:true,opacity:.7}));
+    mesh.add(e);tower.add(mesh);
+    return {mesh,m,e,act:0,hov:0,glass:!!map};
+  }
+  // 0 lobby, 1..9 plantas, 10 terraza
+  items.push(Object.assign(mk(3.8,2.8,.5,0x2b3d42,.95,gold),{h:.5}));
+  for(let i=1;i<=9;i++){
+    const f=Object.assign(mk(2.6,1.8,H,0xffffff,.82,0xa8e6f2,winDay),{h:H});
+    const sp=new THREE.Mesh(new THREE.BoxGeometry(2.64,.09,1.84),new THREE.MeshStandardMaterial({color:0xdfe6e6,roughness:.7}));
+    sp.position.y=-H/2+.045;f.mesh.add(sp);items.push(f);
+  }
+  items.push(Object.assign(mk(2.6,1.8,.16,0x2aa7c9,.8,gold),{h:.16}));
+  items.forEach((it,i)=>{it.i=i;it.zone=ZONES.findIndex(z=>z.a.includes(i));byMesh.set(it.mesh,it)});
+
+  const core=new THREE.Mesh(new THREE.BoxGeometry(.9,1,.7),new THREE.MeshStandardMaterial({color:0x22343a,roughness:.6}));tower.add(core);
+  const fin=new THREE.Mesh(new THREE.BoxGeometry(.5,1,1.9),new THREE.MeshStandardMaterial({color:0x4a5b60,roughness:.55}));fin.position.x=-1.58;tower.add(fin);
+
+  // rótulo dorado en la base
+  const cv=document.createElement('canvas');cv.width=1024;cv.height=128;const cx=cv.getContext('2d');
+  cx.fillStyle='#2b3d42';cx.fillRect(0,0,1024,128);cx.fillStyle='#c4ab7b';cx.font='64px Georgia,serif';cx.textAlign='center';cx.textBaseline='middle';cx.fillText('HOTEL CHICAMOCHA',512,68);
+  const sign=new THREE.Mesh(new THREE.PlaneGeometry(2.6,.32),new THREE.MeshBasicMaterial({map:new THREE.CanvasTexture(cv)}));
+  sign.position.set(0,0,1.42);items[0].mesh.add(sign);
+
+  // piscina con oleaje en la terraza
+  const wg=new THREE.PlaneGeometry(2.1,1.4,14,9);wg.rotateX(-Math.PI/2);
+  const wBase=Float32Array.from(wg.attributes.position.array);
+  const water=new THREE.Mesh(wg,new THREE.MeshStandardMaterial({color:0x2ec4e6,roughness:.15,metalness:.3,transparent:true,opacity:.92}));
+  water.position.y=.09;items[10].mesh.add(water);
+
+  // cañón: valle con paredes a ambos lados, en sólido y en malla dorada
+  const tg=new THREE.PlaneGeometry(76,76,76,76);tg.rotateX(-Math.PI/2);
+  const tp=tg.attributes.position;
+  for(let i=0;i<tp.count;i++){
+    const x=tp.getX(i),z=tp.getZ(i);
+    let h=Math.max(-1.2,Math.abs(z)*.2-1.5+.9*Math.sin(x*.35)*Math.cos(z*.3)+.45*Math.sin(x*.9+z*.7));
+    const k=Math.min(1,Math.max(0,(Math.hypot(x*.7,z)-3.2)/4.5));
+    tp.setY(i,h*k+(-.06)*(1-k)-.02);
+  }
+  tg.computeVertexNormals();
+  const terrM=new THREE.MeshStandardMaterial({color:0xc2a878,roughness:.95,flatShading:true,polygonOffset:true,polygonOffsetFactor:1,polygonOffsetUnits:1});
+  const terrW=new THREE.MeshBasicMaterial({color:0x8a6b3a,wireframe:true,transparent:true,opacity:.35});
+  const terr=new THREE.Mesh(tg,terrM),terrWire=new THREE.Mesh(tg,terrW);
+  scene.add(terr,terrWire);
+
+  // polvo dorado y estrellas
+  const dg=new THREE.BufferGeometry(),dp=[];
+  for(let i=0;i<160;i++){const r=3+Math.random()*5,a=Math.random()*6.283;dp.push(Math.cos(a)*r,Math.random()*9,Math.sin(a)*r)}
+  dg.setAttribute('position',new THREE.Float32BufferAttribute(dp,3));
+  const dust=new THREE.Points(dg,new THREE.PointsMaterial({color:gold,size:.06,transparent:true,opacity:.75,depthWrite:false}));scene.add(dust);
+  const sg=new THREE.BufferGeometry(),sp=[];
+  for(let i=0;i<420;i++){const r=38+Math.random()*10,a=Math.random()*6.283,b=Math.random()*1.2+.1;sp.push(Math.cos(a)*r*Math.cos(b),Math.sin(b)*r,Math.sin(a)*r*Math.cos(b))}
+  sg.setAttribute('position',new THREE.Float32BufferAttribute(sp,3));
+  const stars=new THREE.Points(sg,new THREE.PointsMaterial({color:0xffffff,size:.28,transparent:true,opacity:0,fog:false,depthWrite:false}));scene.add(stars);
+
+  const state={p:0,pS:0,a:-.55,e:.26,y:0,mx:0,my:0,vis:true,yaw:0,pit:0,view:'libre',spin:false,spinA:0,
+    manual:null,nightT:0,night:0,lit:false,drag:null,hover:null,last:performance.now(),dist:12.5};
+  const GAP=.62;
+
+  function layout(e){
+    let y=0;
+    items.forEach((it,i)=>{
+      it.mesh.position.y=y+it.h/2+e*(it.zone*GAP+i*.05);
+      y+=it.h;
+      it.mesh.position.x=it.act*e*.55;
+      const nightGlass=state.lit&&it.glass;
+      it.m.emissive.setHex(nightGlass?0xffe2a8:0x1b6f80);
+      it.m.emissiveIntensity=(nightGlass?.7:0)+(it.act+it.hov*.6)*.5;
+      const on=it.act>.5||it.hov>.5;
+      it.e.material.color.setHex(on?gold:0xa8e6f2);it.e.material.opacity=.55+Math.max(it.act,it.hov)*.45;
+    });
+    const top=items[items.length-1].mesh.position.y;
+    core.scale.y=Math.max(.1,top);core.position.y=top/2;
+    fin.scale.y=Math.max(.1,top);fin.position.y=top/2;
+  }
+  function size(){
+    const w=host.clientWidth,h=host.clientHeight||1;renderer.setSize(w,h,false);cam.aspect=w/h;
+    state.dist=w/h<.9?19:12.5;cam.updateProjectionMatrix();
+  }
+  new ResizeObserver(size).observe(host);size();
+
+  /* ----- interacción: arrastrar para girar, pasar el ratón, tocar un nivel ----- */
+  const ray=new THREE.Raycaster(),m2=new THREE.Vector2();
+  function pick(e){
+    const r=cvEl.getBoundingClientRect();
+    m2.set(((e.clientX-r.left)/r.width)*2-1,-((e.clientY-r.top)/r.height)*2+1);
+    ray.setFromCamera(m2,cam);
+    const hit=ray.intersectObjects(items.map(i=>i.mesh),true)[0];
+    if(!hit)return null;
+    let o=hit.object;while(o&&!byMesh.has(o))o=o.parent;
+    return o?byMesh.get(o):null;
+  }
+  cvEl.addEventListener('pointerdown',e=>{state.drag={x:e.clientX,y:e.clientY,moved:0};cvEl.setPointerCapture(e.pointerId)});
+  cvEl.addEventListener('pointermove',e=>{
+    const r=host.getBoundingClientRect();
+    state.mx=((e.clientX-r.left)/r.width-.5);state.my=((e.clientY-r.top)/r.height-.5);
+    if(state.drag){
+      const dx=e.clientX-state.drag.x,dy=e.clientY-state.drag.y;
+      state.drag.x=e.clientX;state.drag.y=e.clientY;state.drag.moved+=Math.abs(dx)+Math.abs(dy);
+      state.yaw+=dx*.008;state.pit=Math.max(-.5,Math.min(.6,state.pit+dy*.004));
+      return;
+    }
+    if(e.pointerType==='mouse'){
+      const it=pick(e);state.hover=it;
+      if(it){tip.textContent=ZONES[it.zone].t;tip.hidden=false;tip.style.transform=`translate(${e.clientX-r.left+14}px,${e.clientY-r.top+14}px)`}
+      else tip.hidden=true;
+      cvEl.style.cursor=it?'pointer':'grab';
+    }
+  });
+  cvEl.addEventListener('pointerup',e=>{
+    const d=state.drag;state.drag=null;
+    if(d&&d.moved<6){const it=pick(e);if(it)goZone(it.zone)}
+  });
+  cvEl.addEventListener('pointerleave',()=>{state.hover=null;tip.hidden=true});
+
+  /* ----- controles ----- */
+  const bDay=$('cDay'),bSpin=$('cSpin'),sl=$('cExp'),views=[...document.querySelectorAll('[data-view]')];
+  function sync(){
+    bDay.setAttribute('aria-pressed',state.nightT===1);bSpin.setAttribute('aria-pressed',state.spin);
+    views.forEach(b=>b.setAttribute('aria-pressed',b.dataset.view===state.view));
+  }
+  bDay.addEventListener('click',()=>{state.nightT=state.nightT?0:1;sync()});
+  bSpin.addEventListener('click',()=>{state.spin=!state.spin;sync()});
+  views.forEach(b=>b.addEventListener('click',()=>{state.view=b.dataset.view;state.yaw=0;state.pit=0;sync()}));
+  sl.addEventListener('input',()=>{state.manual=sl.value/100});
+  $('cReset').addEventListener('click',()=>{Object.assign(state,{yaw:0,pit:0,view:'libre',spin:false,manual:null,nightT:0});sync()});
+  sync();
+
+  new IntersectionObserver(es=>{state.vis=es[0].isIntersecting;if(state.vis){state.last=performance.now();loop()}}).observe(tour);
+
+  const tmp=new THREE.Color(),cDay=new THREE.Color(0xc2a878),cNight=new THREE.Color(0x16272b),wDay=new THREE.Color(0x8a6b3a),wNight=new THREE.Color(gold);
+  const v3=new THREE.Vector3();let raf=0,t=0;
+  function loop(){
+    cancelAnimationFrame(raf);
+    const now=performance.now(),dt=Math.min(.05,(now-state.last)/1000);state.last=now;t+=dt;
+    const p=progress(),f=reduce?1:.08;
+    state.pS+=(p-state.pS)*f;
+    const z=Math.min(ZONES.length-1,Math.floor(p*ZONES.length));setZone(z);
+    const e=state.manual!=null?state.manual:Math.min(1,state.pS*5);
+    if(state.manual==null){const v=Math.round(e*100);if(+sl.value!==v)sl.value=v}
+
+    // día / noche
+    state.night+=(state.nightT-state.night)*(reduce?1:.06);
+    const n=state.night,lit=n>.5;
+    if(lit!==state.lit){state.lit=lit;items.forEach(it=>{if(it.glass){it.m.map=lit?winNight:winDay;it.m.emissiveMap=lit?winNight:null;it.m.needsUpdate=true}})}
+    tmp.copy(DAY).lerp(NIGHT,n);host.style.backgroundColor='#'+tmp.getHexString();scene.fog.color.copy(tmp);
+    host.dataset.mode=lit?'night':'day';
+    amb.intensity=.85-.6*n;key.intensity=.95-.75*n;warm.intensity=.9+.7*n;
+    terrM.color.copy(cDay).lerp(cNight,n);terrW.color.copy(wDay).lerp(wNight,n);stars.material.opacity=n*.95;
+
+    items.forEach(it=>{it.act+=((it.zone===z?1:0)-it.act)*(reduce?1:.12);it.hov+=((state.hover===it?1:0)-it.hov)*.2});
+    layout(e);
+
+    // piscina y polvo
+    const wp=wg.attributes.position;
+    for(let i=0;i<wp.count;i++){const x=wBase[i*3],zz=wBase[i*3+2];wp.setY(i,.03*Math.sin(x*5+t*2)+.022*Math.cos(zz*6+t*1.6))}
+    wp.needsUpdate=true;
+    dust.rotation.y+=dt*.05;
+
+    // cámara
+    const idx=ZONES[z].a,mid=idx.reduce((s,k)=>s+items[k].mesh.position.y,0)/idx.length;
+    state.y+=(mid-state.y)*(reduce?1:.07);
+    if(state.spin)state.spinA+=dt*.35;
+    const tA=(state.view==='libre'?-.55+state.pS*2.4+(reduce?0:state.mx*.5):state.view==='fachada'?0:.7)+state.yaw+state.spinA;
+    state.a+=(tA-state.a)*(reduce?1:.08);
+    const tE=(state.view==='libre'?.26-(reduce?0:state.my*.2):state.view==='fachada'?.06:1.0)+state.pit;
+    state.e+=(tE-state.e)*(reduce?1:.08);
+    const d=state.dist*(state.view==='aerea'?1.2:1),ce=Math.cos(state.e);
+    cam.position.set(Math.sin(state.a)*ce*d,state.y+Math.sin(state.e)*d,Math.cos(state.a)*ce*d);
+    cam.lookAt(0,state.y,0);
+
+    // etiqueta del nivel activo
+    v3.set(1.9,mid,0).project(cam);
+    if(v3.z<1){tag.hidden=false;tag.textContent=ZONES[z].t;
+      tag.style.transform=`translate(${(v3.x*.5+.5)*host.clientWidth+8}px,${(-v3.y*.5+.5)*host.clientHeight}px)`}else tag.hidden=true;
+
+    renderer.render(scene,cam);
+    if(state.vis)raf=requestAnimationFrame(loop);
+  }
+  loop();
+}
+function boot(){
+  setZone(0);
+  if(window.THREE)init3d();else{document.body.classList.add('no3d');$('hint').remove()}
+}
+if(window.THREE)boot();else addEventListener('load',boot);
+})();
+</script>
+</body>
+</html>
